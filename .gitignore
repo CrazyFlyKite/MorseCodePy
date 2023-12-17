@@ -1,0 +1,19 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore virtual environment
+venv/
+
+# Ignore editor configurations
+.editorconfig
+
+# Ignore generated files or directories
+dist/
+*.egg-info/
+
+# Ignore PyCharm IDE files
+.idea/
+
+# Other
+.DS_Store
