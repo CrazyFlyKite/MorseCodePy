@@ -1,17 +1,15 @@
 from setuptools import setup, find_packages
 
 __project_name__ = 'MorseCodePy'
-__project_page__ = 'https://github.com/CrazyFlyKite/MorseCodePy/'
-__project_version__ = '3.4'
+__project_page__ = 'https://github.com/CrazyFlyKite/MorseCodePy'
+__project_version__ = '3.5'
 __license__ = 'MIT'
 __author__ = 'CrazyFlyKite'
 __email__ = 'karpenkoartem2846@gmail.com'
-__requires__ = ['pygame']
+__install_requires__ = ['pygame']
 __package_data__ = {'MorseCodePy': ['sounds/*.wav']}
-__description__ = 'Encode, decode & play Morse Code easily'
+__description__ = 'Encode, decode & play Morse code easily'
 __classifiers__ = [
-	'Natural Language :: English',
-	'Development Status :: 5 - Production/Stable',
 	'Intended Audience :: Developers',
 	'License :: OSI Approved :: MIT License',
 	'Programming Language :: Python :: 3.10',
@@ -28,10 +26,6 @@ if __name__ == '__main__':
 	setup(
 		name=__project_name__,
 		url=__project_page__,
-		packages=find_packages(),
-		requires=__requires__,
-		package_data=__package_data__,
-		include_package_data=True,
 		version=__project_version__,
 		author=__author__,
 		author_email=__email__,
@@ -39,5 +33,9 @@ if __name__ == '__main__':
 		description=__description__,
 		long_description=__documentation__,
 		long_description_content_type='text/markdown',
+		install_requires=__install_requires__,
+		packages=find_packages(),
+		include_package_data=True,
+		package_data=__package_data__,
 		classifiers=__classifiers__
 	)
