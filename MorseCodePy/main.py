@@ -1,8 +1,9 @@
 import logging
+from io import StringIO
 from time import sleep
 
 from .audio_manager import AudioManager
-from .codes import encodes, decodes, Language
+from .codes import encodes, decodes
 from .setup_logging import setup_logging
 from .utilities import *
 
@@ -10,13 +11,13 @@ from .utilities import *
 setup_logging(level=logging.WARNING)
 
 
-def encode(string: str, language: Language, dot: str = '.', dash: str = '-', separator: str = '/',
+def encode(string: str, language: str, *, dot: str = '.', dash: str = '-', separator: str = '/',
            error: str = '*') -> str | None:
 	"""
 	Encodes your string into Morse code.
 
 	:parameter string: The input string to be encoded.
-	:parameter language: The language to use for encoding (e.g., Language.english, Language.french, Language.numbers).
+	:parameter language: The language to use for encoding (e.g., "english", "french", "numbers").
 	:parameter dot: The symbol to represent dots.
 	:parameter dash: The symbol to represent dashes.
 	:parameter separator: The symbol used to separate words.
@@ -25,46 +26,54 @@ def encode(string: str, language: Language, dot: str = '.', dash: str = '-', sep
 	:returns: The Morse code representation of the input string.
 	"""
 
+	# Ensure that code and language don't contain any useless spaces, newlines or tabs
+	string = string.lower().strip()
+	language = language.lower().strip()
+
+	# Error handling: Ensure that language is a valid string
+	if not isinstance(language, str) or language not in encodes:
+		logging.error(error_message5)
+		return
+
 	# Error handling: Ensure that dot, dash, and separator have only one symbol
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
 		logging.error(error_message1)
 		return
 
 	# Translating string into Morse code
-	code: str = ''  # New string that will hold the translated text
-	string = string.lower().strip()  # Convert the input string to lowercase for consistent encoding
+	code_io = StringIO()
 
 	character: int = 0
 	while character != len(string):
 		if string[character] == 'c' and string[character + 1] == 'h':
-			code += dash * 4 + ' '
+			code_io.write(dash * 4 + ' ')
 			character += 1
 		elif string[character] == ' ':
-			code += separator + ' '
+			code_io.write(separator + ' ')
 		elif string[character] in encodes[language]:
 			morse_code = encodes[language][string[character]]
-			code += morse_code.replace('0', dot).replace('1', dash) + ' '
-		elif string[character] in encodes[Language.numbers]:
-			morse_code = encodes[Language.numbers][string[character]]
-			code += morse_code.replace('0', dot).replace('1', dash) + ' '
-		elif string[character] in encodes[Language.special]:
-			morse_code = encodes[Language.special][string[character]]
-			code += morse_code.replace('0', dot).replace('1', dash) + ' '
+			code_io.write(morse_code + ' ')
+		elif string[character] in encodes['numbers']:
+			morse_code = encodes['numbers'][string[character]]
+			code_io.write(morse_code + ' ')
+		elif string[character] in encodes['special']:
+			morse_code = encodes['special'][string[character]]
+			code_io.write(morse_code + ' ')
 		else:
-			code += error + ' '
+			code_io.write(error + ' ')
 
 		character += 1
 
-	return code.rstrip()
+	return code_io.getvalue().rstrip()
 
 
-def decode(code: str, language: Language, dot: str = '.', dash: str = '-', separator: str = '/',
+def decode(code: str, language: str, *, dot: str = '.', dash: str = '-', separator: str = '/',
            error: str = '*') -> str | None:
 	"""
 	Decode Morse code into a string.
 
 	:parameter code: The input Morse code string to be decoded.
-	:parameter language: The language to use for decoding (e.g., Language.russian, Language.spanish, Language.special).
+	:parameter language: The language to use for decoding (e.g., "russian", "spanish", "special").
 	:parameter dot: The symbol used to represent dots.
 	:parameter dash: The symbol used to represent dashes.
 	:parameter separator: The symbol used to separate words.
@@ -72,6 +81,14 @@ def decode(code: str, language: Language, dot: str = '.', dash: str = '-', separ
 
 	:returns: The decoded string.
 	"""
+
+	# Ensure that language doesn't contain any useless spaces, newlines or tabs
+	language = language.lower().strip()
+
+	# Error handling: Ensure that language is a valid string
+	if language not in decodes:
+		logging.error(error_message5)
+		return
 
 	# Error Handling: Ensure that dot, dash, and separator have only one symbol
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
@@ -83,46 +100,40 @@ def decode(code: str, language: Language, dot: str = '.', dash: str = '-', separ
 		logging.error(error_message2)
 		return
 
+	# Replacing characters in code for consistent decoding
+	code = code.strip().replace(dot, '.').replace(dash, '-')
+
 	# Separating String: Split the input Morse code into letters and separators
 	letters: list[str] = separate_words(code, dot, dash, separator)
 
-	# Ensure that code doesn't contain any useless spaces, newlines or tabs
-	code = code.strip()
-
 	# Translating Morse Code into normal text
-	string: str = ''
+	string_io = StringIO()
 
 	# Create dictionaries to map Morse code to characters for the selected language
-	reversed_codes: dict[str] = reversed_dictionary(decodes[language])
-	reversed_numbers: dict[str] = reversed_dictionary(decodes[Language.numbers])
-	reversed_special: dict[str] = reversed_dictionary(decodes[Language.special])
-
-	# Create a mapping dictionary to translate Morse code symbols to '0' and '1'
-	mapping: dict[str: str] = {dot: '0', dash: '1'}
+	reversed_codes: dict[str: str] = reversed_dictionary(decodes[language])
+	reversed_numbers: dict[str: str] = reversed_dictionary(decodes['numbers'])
+	reversed_special: dict[str: str] = reversed_dictionary(decodes['special'])
 
 	for letter in letters:
-		# Translate Morse code symbols to '0' and '1'
-		letter = ''.join(mapping.get(character, character) for character in letter)
-
-		if letter == '1111' and language in {Language.english, Language.spanish, Language.french}:
-			string += 'ch'
+		if letter == '----' and language in {'english', 'spanish', 'french'}:
+			string_io.write('ch')
 		elif letter == separator:
-			string += ' '
+			string_io.write(' ')
 		elif letter == '\n':
-			string += '\n'
+			string_io.write(letter)
 		elif letter in reversed_codes:
-			string += reversed_codes[letter]
-		elif letter in reversed_numbers and language != Language.special:
-			string += reversed_numbers[letter]
-		elif letter in reversed_special and language != Language.numbers:
-			string += reversed_special[letter]
+			string_io.write(reversed_codes[letter])
+		elif letter in reversed_numbers and language != 'special':
+			string_io.write(reversed_numbers[letter])
+		elif letter in reversed_special and language != 'numbers':
+			string_io.write(reversed_special[letter])
 		else:
-			string += error
+			string_io.write(error)
 
-	return string
+	return string_io.getvalue()
 
 
-def chart(dot: str = '·', dash: str = '-') -> None:
+def chart(*, dot: str = '·', dash: str = '-') -> None:
 	"""
 	Print Morse code chart in the console.
 
@@ -137,26 +148,21 @@ def chart(dot: str = '·', dash: str = '-') -> None:
 
 	# Iterate through the language codes and their corresponding characters
 	for language, codes in encodes.items():
-		print()
-		print(language.name.capitalize())
+		print('\n' + language.capitalize())
 
 		# Print characters and their Morse code representations
 		for character, code in codes.items():
 			if code not in {'\n', ' '}:
-				code = code.replace('0', dot).replace('1', dash)
+				code = code.replace('.', dot).replace('-', dash)
 				print(f'{character:<5} {code}')
 
-		print()
-		print('-' * 15)
+		print('\n' + '-' * 15)
 
 
-def play(code: str, delay: float = 0.5, volume: float = 1.0, dot: str = '.', dash: str = '-',
+def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: str = '.', dash: str = '-',
          separator: str = '/') -> None:
 	"""
 	Play Morse code sound.
-
-	Note:
-		This function require the pygame library for audio playback.
 
 	:parameter code: The Morse code string to play.
 	:parameter delay: The delay in seconds between each Morse code symbol (default is 0.4).
@@ -179,19 +185,19 @@ def play(code: str, delay: float = 0.5, volume: float = 1.0, dot: str = '.', das
 
 	# Error Handling: Ensure that delay is smaller than 1.0
 	if delay < 0.3:
-		logging.error(error_message5)
+		logging.error(error_message4)
 		return
 
 	# Error Handling: Ensure that volume is within the valid range
 	if not 0.0 < volume <= 1.0:
-		logging.error(error_message4)
+		logging.error(error_message3)
 		return
 
 	# Separate the string into individual Morse code characters
 	characters: list[str] = separate_letters(separate_words(code.strip(), dot, dash, separator, sound_mode=True))
 
 	# Initialize audio manager
-	audio_manager = AudioManager(volume)
+	audio_manager = AudioManager(volume=volume)
 
 	try:
 		for character in characters:
@@ -210,5 +216,5 @@ def play(code: str, delay: float = 0.5, volume: float = 1.0, dot: str = '.', das
 					audio_manager.play_error()
 					sleep(delay / 1.5)
 	except KeyboardInterrupt:
-		logging.error(error_message3)
+		logging.warning(warning_message2)
 		return

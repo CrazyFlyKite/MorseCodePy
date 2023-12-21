@@ -1,6 +1,5 @@
 # Import everything
 from .main import encode, decode, chart, play
-from .codes import Language
 
 """
 MorseCodePy: Python Morse Code Helper
@@ -11,5 +10,5 @@ Encode and decode text, play Morse code sounds, and explore the rich history of 
 Explore the  features of MorseCodePy and let Morse code become an exciting part of your Python projects!
 
 For detailed documentation and customization options, visit the GitHub repository:
-https://github.com/CrazyFlyKite/MorseCodePy/
+https://github.com/CrazyFlyKite/MorseCodePy
 """

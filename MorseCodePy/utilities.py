@@ -1,13 +1,14 @@
 # Error messages
 error_message1: str = 'Invalid Symbols - Dots, dashes, and separators must be single characters!'
 error_message2: str = 'Invalid Characters - Use only specified dots, dashes, spaces, and separators!'
-error_message3: str = 'Keyboard Interrupt - Morse code playback interrupted by user.'
-error_message4: str = 'Invalid Volume - Volume should be between 0.0 and 1.0!'
-error_message5: str = 'Invalid Delay - The specified delay should be more than 0.3!'
+error_message3: str = 'Invalid Volume - Volume should be between 0.0 and 1.0!'
+error_message4: str = 'Invalid Delay - The specified delay should be more than 0.3!'
+error_message5: str = 'Invalid Language - The specified language is not recognized or supported! Read the documentation for more details.'
 warning_message1: str = 'Long Delay - The specified delay is longer than recommended (1 second). Playback may be slower than expected.'
+warning_message2: str = 'Keyboard Interrupt - Morse code playback interrupted by user.'
 
 
-def separate_words(words: str, dot: str, dash: str, separator: str, sound_mode: bool = False) -> list[str]:
+def separate_words(words: str, dot: str, dash: str, separator: str, *, sound_mode: bool = False) -> list[str]:
 	"""
 	Separate a string into Morse code letters.
 

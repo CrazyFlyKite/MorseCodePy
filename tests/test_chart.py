@@ -11,7 +11,7 @@ class TestChart(unittest.TestCase):
 		chart()
 
 		chart_output = mock_stdout.getvalue()
-		expected_output = """Morse Code Chart
+		expected_output = '''Morse Code Chart
 
 ---------------
 
@@ -225,8 +225,8 @@ Special
 &     ·-···
 ;     -·-·-·
 :     ---···
-\'     ·----·
 \"     ·-··-·
+\'     ·----·
 $     ···-··-
 +     ·-·-·
 -     -····-
@@ -234,7 +234,7 @@ $     ···-··-
 _     ··--·-
 
 ---------------
-"""
+'''
 
 		self.assertEqual(chart_output, expected_output)
 

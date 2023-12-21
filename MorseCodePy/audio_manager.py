@@ -11,13 +11,9 @@ from pathlib import Path
 class AudioManager:
 	"""
 	The AudioManager class manages audio playback for Morse code.
-
-	Note:
-	    The AudioManager class requires the pygame library for audio playback. Make sure pygame is installed
-	    before using.
 	"""
 
-	def __init__(self, volume: float, directory: Path = Path('sounds'), dot_sound_file: Path = Path('dot.wav'),
+	def __init__(self, *, volume: float, directory: Path = Path('sounds'), dot_sound_file: Path = Path('dot.wav'),
 	             dash_sound_file: Path = Path('dash.wav'), error_sound_file: Path = Path('error.wav')) -> None:
 		"""
 		Initializes the AudioManager with the specified volume and sound files.
