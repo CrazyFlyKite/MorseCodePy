@@ -2,15 +2,11 @@
 __pycache__/
 *.pyc
 
-# Ignore editor configurations file
-.editorconfig
-
 # Ignore virtual environment
 venv/
 
 # Ignore generated files or directories
 dist/
-*.egg-info/
 
 # Ignore PyCharm IDE files
 .idea/

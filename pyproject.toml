@@ -1,0 +1,30 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "MorseCodePy"
+version = "3.5"
+description = "Encode, decode & play Morse code easily"
+dependencies = ["pygame>=2.5.2"]
+requires-python = ">=3.10"
+authors = [{ name = "CrazyFlyKite", email = "karpenkoartem2846@gmail.com" }]
+readme = "README.md"
+classifiers = [
+	"Intended Audience :: Developers",
+	"License :: OSI Approved :: MIT License",
+	"Programming Language :: Python :: 3.10",
+	"Programming Language :: Python :: 3.11",
+	"Programming Language :: Python :: 3.12",
+	"Programming Language :: Python :: 3.13",
+	"Topic :: Utilities"
+]
+
+[options]
+packages = ["MorseCodePy"]
+include_package_data = true
+package_data = { MorseCodePy = ["sounds/*.wav", "codes/*.json"] }
+
+[project.urls]
+Repository = "https://github.com/CrazyFlyKite/MorseCodePy"
+PyPI = "https://pypi.org/project/MorseCodePy"

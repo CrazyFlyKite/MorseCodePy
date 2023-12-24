@@ -1,6 +1,9 @@
 # Import everything
 from .main import encode, decode, chart, play
 
+# Specify version
+__version__ = '3.5'
+
 """
 MorseCodePy: Python Morse Code Helper
 

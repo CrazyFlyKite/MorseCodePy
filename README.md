@@ -5,26 +5,25 @@
 ### Requirements
 
 ![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue)
-[![pygame Version](https://img.shields.io/badge/pygame-2.5.2%2B-red)](requirements.txt)
+![pygame Version](https://img.shields.io/badge/pygame-2.5.2%2B-red)
 
 ## Introduction
 
 **MorseCodePy** is a versatile Python module that streamlines the **encoding** and **decoding**
-of text into Morse code and back. With support for multiple languages, including **English**, **Russian**, **Ukrainian
-**,
+of text into Morse code and back. With support for multiple languages, including **English**, **Russian**, **Ukrainian**,
 **Spanish**, **French**, as well as provisions for handling **numbers** and other **special characters**, this module
 offers a powerful and **user-friendly** Morse code tool.
 ___
 
 ## How to use
 
-#### `encode(string, language, dot, dash, error)`
+#### `encode(string, language, *, dot, dash, error)`
 
 Encode a text string into Morse code.
 
 - `string`: The text string you want to encode.
 - `language`: The target language for encoding (
-  e.g., `"english"`, `"french"`, `"spanish"`, `"russian"`, `"ukranian"`, `"numbers"`, `"special"`).
+  e.g., `english`, `french`, `spanish`, `russian`, `ukranian`, `numbers`, `special`).
 - `dot`: *(optional)* Symbol to represent dots (default is `.`).
 - `dash`: *(optional)* Symbol to represent dashes (default is `-`).
 - `error`: *(optional)* Symbol to represent errors when an unknown character is encountered (default is `*`).
@@ -48,13 +47,13 @@ print(encoded_string)
 
 ___
 
-#### `decode(code, language, dot, dash, error)`
+#### `decode(code, language, *, dot, dash, error)`
 
 Decode Morse code into a text string.
 
 - `code`: The Morse code string you want to decode.
 - `language`: The target language for decoding (
-  e.g., `"english"`, `"french"`, `"spanish"`, `"russian"`, `"ukranian"`, `"numbers"`, `"special"`).
+  e.g., `english`, `french`, `spanish`, `russian`, `ukranian`, `numbers`, `special`).
 - `dot`: *(optional)* Symbol to represent dots (default is `.`).
 - `dash`: *(optional)* Symbol to represent dashes (default is `-`).
 - `error`: *(optional)* Symbol to represent errors when an unknown Morse code sequence is encountered (default is `*`).
@@ -69,7 +68,7 @@ print(decoded_string)
 
 ___
 
-#### `play(code, delay, volume, dot, dash, separator)`
+#### `play(code, delay, volume, *, dot, dash, separator)`
 
 Play Morse code sound.
 
@@ -90,7 +89,7 @@ play(encoded_string, delay=0.5, volume=0.8)
 
 ___
 
-#### `chart(dot, dash)`
+#### `chart(*, dot, dash)`
 
 Print a Morse code chart in the console.
 
