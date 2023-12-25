@@ -1,16 +1,30 @@
 import json
 from os import path
 
-# Get the absolute path of the current module
-current_module_path = path.dirname(path.abspath(__file__))
 
-# Construct the paths to the .json files
-encodes_file_path = path.join(current_module_path, 'codes', 'encodes.json')
-decodes_file_path = path.join(current_module_path, 'codes', 'decodes.json')
+# Load the encodes.json
+def get_encodes() -> dict[str: dict[str: str]]:
+	"""
+	Load the Morse code encodings from the "encodes.json" file.
 
-# Load the JSON files
-with open(encodes_file_path, 'r') as file:
-	encodes = json.load(file)
+	:returns: A dictionary containing Morse code encodings.
+	"""
 
-with open(decodes_file_path, 'r') as file:
-	decodes = json.load(file)
+	file_path = path.join(path.dirname(path.abspath(__file__)), 'codes', 'encodes.json')
+
+	with open(file_path, 'r', encoding='utf-8') as file:
+		return json.load(file)
+
+
+# Load the decodes.json
+def get_decodes() -> dict[str: dict[str: str]]:
+	"""
+	Load the Morse code decodings from the "decodes.json" file.
+
+	:returns: A dictionary containing Morse code decodings.
+	"""
+
+	file_path = path.join(path.dirname(path.abspath(__file__)), 'codes', 'decodes.json')
+
+	with open(file_path, 'r', encoding='utf-8') as file:
+		return json.load(file)

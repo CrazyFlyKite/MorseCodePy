@@ -59,7 +59,7 @@ def separate_letters(letters: list[str]) -> list[str]:
 	return [character for letter in letters for character in letter]
 
 
-def reversed_dictionary(dictionary: dict) -> dict:
+def reverse_dictionary(dictionary: dict) -> dict:
 	"""
 	Reverse the keys and values of a dictionary.
 

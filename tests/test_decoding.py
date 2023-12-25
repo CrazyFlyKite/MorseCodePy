@@ -1,4 +1,5 @@
 import unittest
+
 from MorseCodePy.main import decode
 
 
@@ -28,8 +29,7 @@ class TestDecoding(unittest.TestCase):
 		self.assertEqual(decode('.-.- -.- / ... .--. .-. .- .-- -.-- ..--..', 'ukrainian'), 'як справи?')
 
 	def test_numbers(self):
-		self.assertEqual(decode('.---- ..--- ...-- ....- ..... -.... --... ---.. ----. -----', 'numbers'),
-		                 '1234567890')
+		self.assertEqual(decode('.---- ..--- ...-- ....- ..... -.... --... ---.. ----. -----', 'numbers'), '1234567890')
 
 	def test_special_characters(self):
 		self.assertEqual(decode('.-.-.- / .--.-. / -.-.-- ..--..', 'special'), '. @ !?')

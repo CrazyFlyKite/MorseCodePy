@@ -1,15 +1,15 @@
-# Ignore compiled Python files
+# Compiled Python files
 __pycache__/
 *.pyc
 
-# Ignore virtual environment
+# Virtual environment
 venv/
 
-# Ignore generated files or directories
+# Generated files or directories
 dist/
 
-# Ignore PyCharm IDE files
+# PyCharm IDE files
 .idea/
 
-# Other
+# DS Store
 .DS_Store

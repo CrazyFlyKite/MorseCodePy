@@ -3,7 +3,7 @@ from io import StringIO
 from time import sleep
 
 from .audio_manager import AudioManager
-from .codes import encodes, decodes
+from .codes import get_encodes, get_decodes
 from .setup_logging import setup_logging
 from .utilities import *
 
@@ -21,7 +21,7 @@ def encode(string: str, language: str, *, dot: str = '.', dash: str = '-', separ
 	:parameter dot: The symbol to represent dots.
 	:parameter dash: The symbol to represent dashes.
 	:parameter separator: The symbol used to separate words.
-	:parameter error: The symbol to represent errors when a character is not found in the dictionary.
+	:parameter error: The symbol to represent errors when a index is not found in the dictionary.
 
 	:returns: The Morse code representation of the input string.
 	"""
@@ -29,6 +29,9 @@ def encode(string: str, language: str, *, dot: str = '.', dash: str = '-', separ
 	# Ensure that code and language don't contain any useless spaces, newlines or tabs
 	string = string.lower().strip()
 	language = language.lower().strip()
+
+	# Get encodes dictionary
+	encodes = get_encodes()
 
 	# Error handling: Ensure that language is a valid string
 	if not isinstance(language, str) or language not in encodes:
@@ -43,26 +46,26 @@ def encode(string: str, language: str, *, dot: str = '.', dash: str = '-', separ
 	# Translating string into Morse code
 	code_io = StringIO()
 
-	character: int = 0
-	while character != len(string):
-		if string[character] == 'c' and string[character + 1] == 'h':
+	index: int = 0
+	while index != len(string):
+		if string[index] == 'c' and string[index + 1] == 'h':
 			code_io.write(dash * 4 + ' ')
-			character += 1
-		elif string[character] == ' ':
+			index += 1
+		elif string[index] == ' ':
 			code_io.write(separator + ' ')
-		elif string[character] in encodes[language]:
-			morse_code = encodes[language][string[character]]
+		elif string[index] in encodes[language]:
+			morse_code = encodes[language][string[index]]
 			code_io.write(morse_code + ' ')
-		elif string[character] in encodes['numbers']:
-			morse_code = encodes['numbers'][string[character]]
+		elif string[index] in encodes['numbers']:
+			morse_code = encodes['numbers'][string[index]]
 			code_io.write(morse_code + ' ')
-		elif string[character] in encodes['special']:
-			morse_code = encodes['special'][string[character]]
+		elif string[index] in encodes['special']:
+			morse_code = encodes['special'][string[index]]
 			code_io.write(morse_code + ' ')
 		else:
 			code_io.write(error + ' ')
 
-		character += 1
+		index += 1
 
 	return code_io.getvalue().rstrip()
 
@@ -84,6 +87,9 @@ def decode(code: str, language: str, *, dot: str = '.', dash: str = '-', separat
 
 	# Ensure that language doesn't contain any useless spaces, newlines or tabs
 	language = language.lower().strip()
+
+	# Get decodes dictionary
+	decodes = get_decodes()
 
 	# Error handling: Ensure that language is a valid string
 	if language not in decodes:
@@ -110,9 +116,9 @@ def decode(code: str, language: str, *, dot: str = '.', dash: str = '-', separat
 	string_io = StringIO()
 
 	# Create dictionaries to map Morse code to characters for the selected language
-	reversed_codes: dict[str: str] = reversed_dictionary(decodes[language])
-	reversed_numbers: dict[str: str] = reversed_dictionary(decodes['numbers'])
-	reversed_special: dict[str: str] = reversed_dictionary(decodes['special'])
+	reversed_codes: dict[str: str] = reverse_dictionary(decodes[language])
+	reversed_numbers: dict[str: str] = reverse_dictionary(decodes['numbers'])
+	reversed_special: dict[str: str] = reverse_dictionary(decodes['special'])
 
 	for letter in letters:
 		if letter == '----' and language in {'english', 'spanish', 'french'}:
@@ -145,6 +151,9 @@ def chart(*, dot: str = '·', dash: str = '-') -> None:
 
 	print('Morse Code Chart\n')
 	print('-' * 15)
+
+	# Get encodes dictionary
+	encodes = get_encodes()
 
 	# Iterate through the language codes and their corresponding characters
 	for language, codes in encodes.items():
