@@ -10,21 +10,22 @@ dependencies = ["pygame>=2.5.2"]
 requires-python = ">=3.10"
 authors = [{ name = "CrazyFlyKite", email = "karpenkoartem2846@gmail.com" }]
 readme = "README.md"
+license = { file = "license.txt"}
 classifiers = [
 	"Intended Audience :: Developers",
 	"License :: OSI Approved :: MIT License",
 	"Programming Language :: Python :: 3.10",
 	"Programming Language :: Python :: 3.11",
 	"Programming Language :: Python :: 3.12",
-	"Programming Language :: Python :: 3.13",
 	"Topic :: Utilities"
 ]
+
+[project.urls]
+Repository = "https://github.com/CrazyFlyKite/MorseCodePy"
+BugTracker = "https://github.com/CrazyFlyKite/MorseCodePy/issues"
+PyPI = "https://pypi.org/project/MorseCodePy"
 
 [options]
 packages = ["MorseCodePy"]
 include_package_data = true
 package_data = { MorseCodePy = ["sounds/*.wav", "codes/*.json"] }
-
-[project.urls]
-Repository = "https://github.com/CrazyFlyKite/MorseCodePy"
-PyPI = "https://pypi.org/project/MorseCodePy"

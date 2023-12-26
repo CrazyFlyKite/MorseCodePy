@@ -21,7 +21,7 @@ def encode(string: str, language: str, *, dot: str = '.', dash: str = '-', separ
 	:parameter dot: The symbol to represent dots.
 	:parameter dash: The symbol to represent dashes.
 	:parameter separator: The symbol used to separate words.
-	:parameter error: The symbol to represent errors when a index is not found in the dictionary.
+	:parameter error: The symbol to represent errors when the index is not found in the dictionary.
 
 	:returns: The Morse code representation of the input string.
 	"""
