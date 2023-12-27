@@ -6,15 +6,13 @@ environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 from pygame import mixer
 from os import path
 from pathlib import Path
+from typing import Optional
 
 
 class AudioManager:
-	"""
-	The AudioManager class manages audio playback for Morse code.
-	"""
-
-	def __init__(self, *, volume: float, directory: Path = Path('sounds'), dot_sound_file: Path = Path('dot.wav'),
-	             dash_sound_file: Path = Path('dash.wav'), error_sound_file: Path = Path('error.wav')) -> None:
+	def __init__(self, *, volume: float, directory: Optional[Path] = Path('sounds'),
+	             dot_sound_file: Optional[Path] = Path('dot.wav'), dash_sound_file: Optional[Path] = Path('dash.wav'),
+	             error_sound_file: Optional[Path] = Path('error.wav')) -> None:
 		"""
 		Initializes the AudioManager with the specified volume and sound files.
 
@@ -30,7 +28,8 @@ class AudioManager:
 		self.__dash_sound_file = str(dash_sound_file)
 		self.__error_sound_file = str(error_sound_file)
 
-		mixer.init()  # Initialize the pygame mixer
+		# Initialize the pygame mixer
+		mixer.init()
 
 	def _load(self, filename: str) -> None:
 		sound_path = path.join(path.dirname(__file__), self.__directory, filename)

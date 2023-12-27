@@ -29,3 +29,5 @@ PyPI = "https://pypi.org/project/MorseCodePy"
 packages = ["MorseCodePy"]
 include_package_data = true
 package_data = { MorseCodePy = ["sounds/*.wav", "codes/*.json"] }
+
+

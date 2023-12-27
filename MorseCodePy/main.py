@@ -1,6 +1,7 @@
 import logging
 from io import StringIO
 from time import sleep
+from typing import Optional, List, Dict
 
 from .audio_manager import AudioManager
 from .codes import get_encodes, get_decodes
@@ -11,8 +12,8 @@ from .utilities import *
 setup_logging(level=logging.WARNING)
 
 
-def encode(string: str, language: str, *, dot: str = '.', dash: str = '-', separator: str = '/',
-           error: str = '*') -> str | None:
+def encode(string: str, language: str, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
+           separator: Optional[str] = '/', error: Optional[str] = '*') -> str | None:
 	"""
 	Encodes your string into Morse code.
 
@@ -70,8 +71,8 @@ def encode(string: str, language: str, *, dot: str = '.', dash: str = '-', separ
 	return code_io.getvalue().rstrip()
 
 
-def decode(code: str, language: str, *, dot: str = '.', dash: str = '-', separator: str = '/',
-           error: str = '*') -> str | None:
+def decode(code: str, language: str, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
+           separator: Optional[str] = '/', error: Optional[str] = '*') -> str | None:
 	"""
 	Decode Morse code into a string.
 
@@ -110,15 +111,15 @@ def decode(code: str, language: str, *, dot: str = '.', dash: str = '-', separat
 	code = code.strip().replace(dot, '.').replace(dash, '-')
 
 	# Separating String: Split the input Morse code into letters and separators
-	letters: list[str] = separate_words(code, dot, dash, separator)
+	letters: List[str] = separate_words(code, dot, dash, separator)
 
 	# Translating Morse Code into normal text
 	string_io = StringIO()
 
 	# Create dictionaries to map Morse code to characters for the selected language
-	reversed_codes: dict[str: str] = reverse_dictionary(decodes[language])
-	reversed_numbers: dict[str: str] = reverse_dictionary(decodes['numbers'])
-	reversed_special: dict[str: str] = reverse_dictionary(decodes['special'])
+	reversed_codes: Dict[str: str] = reverse_dictionary(decodes[language])
+	reversed_numbers: Dict[str: str] = reverse_dictionary(decodes['numbers'])
+	reversed_special: Dict[str: str] = reverse_dictionary(decodes['special'])
 
 	for letter in letters:
 		if letter == '----' and language in {'english', 'spanish', 'french'}:
@@ -139,7 +140,7 @@ def decode(code: str, language: str, *, dot: str = '.', dash: str = '-', separat
 	return string_io.getvalue()
 
 
-def chart(*, dot: str = '·', dash: str = '-') -> None:
+def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 	"""
 	Print Morse code chart in the console.
 
@@ -168,8 +169,8 @@ def chart(*, dot: str = '·', dash: str = '-') -> None:
 		print('\n' + '-' * 15)
 
 
-def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: str = '.', dash: str = '-',
-         separator: str = '/') -> None:
+def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
+         separator: Optional[str] = '/') -> None:
 	"""
 	Play Morse code sound.
 
@@ -203,7 +204,7 @@ def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: str = '.', 
 		return
 
 	# Separate the string into individual Morse code characters
-	characters: list[str] = separate_letters(separate_words(code.strip(), dot, dash, separator, sound_mode=True))
+	characters: List[str] = separate_letters(separate_words(code.strip(), dot, dash, separator, sound_mode=True))
 
 	# Initialize audio manager
 	audio_manager = AudioManager(volume=volume)

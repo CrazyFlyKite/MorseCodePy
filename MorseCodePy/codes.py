@@ -1,9 +1,10 @@
 import json
 from os import path
+from typing import Dict
 
 
 # Load the encodes.json
-def get_encodes() -> dict[str: dict[str: str]]:
+def get_encodes() -> Dict[str: Dict[str: str]]:
 	"""
 	Load the Morse code encodings from the "encodes.json" file.
 
@@ -17,7 +18,7 @@ def get_encodes() -> dict[str: dict[str: str]]:
 
 
 # Load the decodes.json
-def get_decodes() -> dict[str: dict[str: str]]:
+def get_decodes() -> Dict[str: Dict[str: str]]:
 	"""
 	Load the Morse code decodings from the "decodes.json" file.
 

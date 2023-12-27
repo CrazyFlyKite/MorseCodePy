@@ -1,3 +1,5 @@
+from typing import Optional, List, Dict
+
 # Error messages
 error_message1: str = 'Invalid Symbols - Dots, dashes, and separators must be single characters!'
 error_message2: str = 'Invalid Characters - Use only specified dots, dashes, spaces, and separators!'
@@ -8,7 +10,7 @@ warning_message1: str = 'Long Delay - The specified delay is longer than recomme
 warning_message2: str = 'Keyboard Interrupt - Morse code playback interrupted by user.'
 
 
-def separate_words(words: str, dot: str, dash: str, separator: str, *, sound_mode: bool = False) -> list[str]:
+def separate_words(words: str, dot: str, dash: str, separator: str, *, sound_mode: Optional[bool] = False) -> List[str]:
 	"""
 	Separate a string into Morse code letters.
 
@@ -21,7 +23,7 @@ def separate_words(words: str, dot: str, dash: str, separator: str, *, sound_mod
 	:returns: A list of Morse code letters.
 	"""
 
-	letters: list = []
+	letters: List = []
 	current: str = ''
 
 	for character in words:
@@ -47,7 +49,7 @@ def separate_words(words: str, dot: str, dash: str, separator: str, *, sound_mod
 	return letters
 
 
-def separate_letters(letters: list[str]) -> list[str]:
+def separate_letters(letters: List[str]) -> List[str]:
 	"""
 	Separate Morse code letters into individual characters.
 
@@ -59,7 +61,7 @@ def separate_letters(letters: list[str]) -> list[str]:
 	return [character for letter in letters for character in letter]
 
 
-def reverse_dictionary(dictionary: dict) -> dict:
+def reverse_dictionary(dictionary: Dict) -> Dict:
 	"""
 	Reverse the keys and values of a dictionary.
 
