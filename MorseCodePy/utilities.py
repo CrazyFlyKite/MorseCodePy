@@ -1,6 +1,6 @@
 from typing import Optional, List, Dict
 
-# Error messages
+# Error and warning messages
 error_message1: str = 'Invalid Symbols - Dots, dashes, and separators must be single characters!'
 error_message2: str = 'Invalid Characters - Use only specified dots, dashes, spaces, and separators!'
 error_message3: str = 'Invalid Volume - Volume should be between 0.0 and 1.0!'

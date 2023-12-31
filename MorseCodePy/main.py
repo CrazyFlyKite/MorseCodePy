@@ -1,7 +1,6 @@
 import logging
 from io import StringIO
 from time import sleep
-from typing import Optional, List, Dict
 
 from .audio_manager import AudioManager
 from .codes import get_encodes, get_decodes
@@ -117,9 +116,9 @@ def decode(code: str, language: str, *, dot: Optional[str] = '.', dash: Optional
 	string_io = StringIO()
 
 	# Create dictionaries to map Morse code to characters for the selected language
-	reversed_codes: Dict[str: str] = reverse_dictionary(decodes[language])
-	reversed_numbers: Dict[str: str] = reverse_dictionary(decodes['numbers'])
-	reversed_special: Dict[str: str] = reverse_dictionary(decodes['special'])
+	reversed_codes: Dict[str, str] = reverse_dictionary(decodes[language])
+	reversed_numbers: Dict[str, str] = reverse_dictionary(decodes['numbers'])
+	reversed_special: Dict[str, str] = reverse_dictionary(decodes['special'])
 
 	for letter in letters:
 		if letter == '----' and language in {'english', 'spanish', 'french'}:

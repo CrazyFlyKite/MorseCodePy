@@ -4,9 +4,9 @@ from typing import Dict
 
 
 # Load the encodes.json
-def get_encodes() -> Dict[str: Dict[str: str]]:
+def get_encodes() -> Dict[str, Dict[str, str]]:
 	"""
-	Load the Morse code encodings from the "encodes.json" file.
+	Load the Morse code encodings from the "encodes.json".
 
 	:returns: A dictionary containing Morse code encodings.
 	"""
@@ -18,9 +18,9 @@ def get_encodes() -> Dict[str: Dict[str: str]]:
 
 
 # Load the decodes.json
-def get_decodes() -> Dict[str: Dict[str: str]]:
+def get_decodes() -> Dict[str, Dict[str, str]]:
 	"""
-	Load the Morse code decodings from the "decodes.json" file.
+	Load the Morse code decodings from the "decodes.json".
 
 	:returns: A dictionary containing Morse code decodings.
 	"""
