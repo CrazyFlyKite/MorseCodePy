@@ -44,30 +44,27 @@ def encode(string: str, language: str, *, dot: Optional[str] = '.', dash: Option
 		return
 
 	# Translating string into Morse code
-	code_io = StringIO()
+	string_io = StringIO()
 
-	index: int = 0
-	while index != len(string):
-		if string[index] == 'c' and string[index + 1] == 'h':
-			code_io.write(dash * 4 + ' ')
-			index += 1
-		elif string[index] == ' ':
-			code_io.write(separator + ' ')
-		elif string[index] in encodes[language]:
-			morse_code = encodes[language][string[index]]
-			code_io.write(morse_code + ' ')
-		elif string[index] in encodes['numbers']:
-			morse_code = encodes['numbers'][string[index]]
-			code_io.write(morse_code + ' ')
-		elif string[index] in encodes['special']:
-			morse_code = encodes['special'][string[index]]
-			code_io.write(morse_code + ' ')
+	ch_handler: bool = False
+	for index, character in enumerate(string):
+		if ch_handler:
+			string_io.write(dash * 4 + ' ')
+			ch_handler = False
+		elif string[index] == 'c' and string[index + 1] == 'h':
+			ch_handler = True
+		elif character == ' ':
+			string_io.write(separator + ' ')
+		elif character in encodes[language]:
+			string_io.write(encodes[language][character] + ' ')
+		elif character in encodes['numbers']:
+			string_io.write(encodes['numbers'][character] + ' ')
+		elif character in encodes['special']:
+			string_io.write(encodes['special'][character] + ' ')
 		else:
-			code_io.write(error + ' ')
+			string_io.write(error + ' ')
 
-		index += 1
-
-	return code_io.getvalue().rstrip()
+	return string_io.getvalue().rstrip()
 
 
 def decode(code: str, language: str, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
