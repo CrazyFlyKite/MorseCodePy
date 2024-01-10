@@ -1,6 +1,7 @@
 import logging
 from io import StringIO
 from time import sleep
+from typing import Literal
 
 from .audio_manager import AudioManager
 from .codes import get_encodes, get_decodes
@@ -10,14 +11,19 @@ from .utilities import *
 # Setup logging
 setup_logging(level=logging.WARNING)
 
+# Custom types
+type StrOrNone = str | None
+type OptionalStr = Optional[str]
+type Language = Literal['english', 'spanish', 'french', 'russian', 'ukrainian', 'numbers', 'special']
 
-def encode(string: str, language: str, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
-           separator: Optional[str] = '/', error: Optional[str] = '*') -> str | None:
+
+def encode(string: str, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
+           separator: OptionalStr = '/', error: OptionalStr = '*') -> StrOrNone:
 	"""
-	Encodes your string into Morse code.
+	Encodes the string into Morse code.
 
 	:parameter string: The input string to be encoded.
-	:parameter language: The language to use for encoding (e.g., "english", "french", "numbers").
+	:parameter language: The language to use for encoding (e.g., english, french, numbers).
 	:parameter dot: The symbol to represent dots.
 	:parameter dash: The symbol to represent dashes.
 	:parameter separator: The symbol used to separate words.
@@ -67,13 +73,13 @@ def encode(string: str, language: str, *, dot: Optional[str] = '.', dash: Option
 	return string_io.getvalue().rstrip()
 
 
-def decode(code: str, language: str, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
-           separator: Optional[str] = '/', error: Optional[str] = '*') -> str | None:
+def decode(code: str, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
+           separator: OptionalStr = '/', error: OptionalStr = '*') -> StrOrNone:
 	"""
-	Decode Morse code into a string.
+	Decode the Morse code into a string.
 
 	:parameter code: The input Morse code string to be decoded.
-	:parameter language: The language to use for decoding (e.g., "russian", "spanish", "special").
+	:parameter language: The language to use for decoding (e.g., russian, spanish, special).
 	:parameter dot: The symbol used to represent dots.
 	:parameter dash: The symbol used to represent dashes.
 	:parameter separator: The symbol used to separate words.
@@ -136,7 +142,7 @@ def decode(code: str, language: str, *, dot: Optional[str] = '.', dash: Optional
 	return string_io.getvalue()
 
 
-def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
+def chart(*, dot: OptionalStr = '·', dash: OptionalStr = '-') -> None:
 	"""
 	Print Morse code chart in the console.
 
@@ -165,8 +171,8 @@ def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 		print('\n' + '-' * 15)
 
 
-def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
-         separator: Optional[str] = '/') -> None:
+def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
+         separator: OptionalStr = '/') -> None:
 	"""
 	Play Morse code sound.
 

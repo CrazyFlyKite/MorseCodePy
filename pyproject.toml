@@ -4,10 +4,10 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "MorseCodePy"
-version = "3.6"
+version = "3.7"
 description = "Encode, decode & play Morse code easily"
 dependencies = ["pygame>=2.5.2"]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 authors = [{ name = "CrazyFlyKite", email = "karpenkoartem2846@gmail.com" }]
 readme = "README.md"
 license = { file = "license.txt"}
@@ -22,7 +22,7 @@ classifiers = [
 
 [project.urls]
 Repository = "https://github.com/CrazyFlyKite/MorseCodePy"
-BugTracker = "https://github.com/CrazyFlyKite/MorseCodePy/issues"
+Bug-Tracker = "https://github.com/CrazyFlyKite/MorseCodePy/issues"
 PyPI = "https://pypi.org/project/MorseCodePy"
 
 [options]
