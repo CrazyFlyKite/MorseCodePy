@@ -15,9 +15,9 @@ of text into Morse code and back. With support for multiple languages, including
 offers a powerful and **user-friendly** Morse code tool.
 ___
 
-## How to use
+## Usage
 
-#### `encode(string, language, *, dot, dash, error)`
+#### `encode(string, /, language, *, dot, dash, error)`
 
 Encode a text string into Morse code.
 
@@ -47,7 +47,7 @@ print(encoded_string)
 
 ___
 
-#### `decode(code, language, *, dot, dash, error)`
+#### `decode(code, /, language, *, dot, dash, error)`
 
 Decode Morse code into a text string.
 
@@ -68,7 +68,7 @@ print(decoded_string)
 
 ___
 
-#### `play(code, delay, volume, *, dot, dash, separator)`
+#### `play(code, /, delay, volume, *, dot, dash, separator)`
 
 Play Morse code sound.
 

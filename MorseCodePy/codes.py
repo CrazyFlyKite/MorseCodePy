@@ -2,9 +2,11 @@ import json
 from os import path
 from typing import Dict
 
+# Custom type
+type JSONDict = Dict[str, Dict[str, str]]
 
-# Load the encodes.json
-def get_encodes() -> Dict[str, Dict[str, str]]:
+
+def get_encodes() -> JSONDict:
 	"""
 	Load the Morse code encodings from the "encodes.json".
 
@@ -17,8 +19,7 @@ def get_encodes() -> Dict[str, Dict[str, str]]:
 		return json.load(file)
 
 
-# Load the decodes.json
-def get_decodes() -> Dict[str, Dict[str, str]]:
+def get_decodes() -> JSONDict:
 	"""
 	Load the Morse code decodings from the "decodes.json".
 

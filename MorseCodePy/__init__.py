@@ -10,5 +10,5 @@ Encode and decode text, play Morse code sounds, and explore the rich history of 
 Explore the  features of MorseCodePy and let Morse code become an exciting part of your Python projects!
 
 For detailed documentation and customization options, visit the GitHub repository:
-https://github.com/CrazyFlyKite/MorseCodePy
+https://github.com/CrazyFlyKite/MorseCodePy?tab=readme-ov-file#usage
 """

@@ -15,9 +15,10 @@ setup_logging(level=logging.WARNING)
 type StrOrNone = str | None
 type OptionalStr = Optional[str]
 type Language = Literal['english', 'spanish', 'french', 'russian', 'ukrainian', 'numbers', 'special']
+type JSONDict = Dict[str, Dict[str, str]]
 
 
-def encode(string: str, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
+def encode(string: str, /, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
            separator: OptionalStr = '/', error: OptionalStr = '*') -> StrOrNone:
 	"""
 	Encodes the string into Morse code.
@@ -37,20 +38,20 @@ def encode(string: str, language: Language, *, dot: OptionalStr = '.', dash: Opt
 	language = language.lower().strip()
 
 	# Get encodes dictionary
-	encodes = get_encodes()
+	encodes: JSONDict = get_encodes()
 
 	# Error handling: Ensure that language is a valid string
 	if not isinstance(language, str) or language not in encodes:
-		logging.error(error_message5)
+		logging.error(ERROR_MESSAGE5)
 		return
 
 	# Error handling: Ensure that dot, dash, and separator have only one symbol
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
-		logging.error(error_message1)
+		logging.error(ERROR_MESSAGE1)
 		return
 
 	# Translating string into Morse code
-	string_io = StringIO()
+	string_io: StringIO = StringIO()
 
 	ch_handler: bool = False
 	for index, character in enumerate(string):
@@ -73,7 +74,7 @@ def encode(string: str, language: Language, *, dot: OptionalStr = '.', dash: Opt
 	return string_io.getvalue().rstrip()
 
 
-def decode(code: str, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
+def decode(code: str, /, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
            separator: OptionalStr = '/', error: OptionalStr = '*') -> StrOrNone:
 	"""
 	Decode the Morse code into a string.
@@ -92,21 +93,21 @@ def decode(code: str, language: Language, *, dot: OptionalStr = '.', dash: Optio
 	language = language.lower().strip()
 
 	# Get decodes dictionary
-	decodes = get_decodes()
+	decodes: JSONDict = get_decodes()
 
 	# Error handling: Ensure that language is a valid string
 	if language not in decodes:
-		logging.error(error_message5)
+		logging.error(ERROR_MESSAGE5)
 		return
 
 	# Error Handling: Ensure that dot, dash, and separator have only one symbol
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
-		logging.error(error_message1)
+		logging.error(ERROR_MESSAGE1)
 		return
 
 	# Error Handling: Ensure that the input string contains only valid Morse code symbols
 	if any(character not in {dot, dash, separator, ' ', '\n'} for character in code):
-		logging.error(error_message2)
+		logging.error(ERROR_MESSAGE2)
 		return
 
 	# Replacing characters in code for consistent decoding
@@ -116,7 +117,7 @@ def decode(code: str, language: Language, *, dot: OptionalStr = '.', dash: Optio
 	letters: List[str] = separate_words(code, dot, dash, separator)
 
 	# Translating Morse Code into normal text
-	string_io = StringIO()
+	string_io: StringIO = StringIO()
 
 	# Create dictionaries to map Morse code to characters for the selected language
 	reversed_codes: Dict[str, str] = reverse_dictionary(decodes[language])
@@ -156,7 +157,7 @@ def chart(*, dot: OptionalStr = '·', dash: OptionalStr = '-') -> None:
 	print('-' * 15)
 
 	# Get encodes dictionary
-	encodes = get_encodes()
+	encodes: JSONDict = get_encodes()
 
 	# Iterate through the language codes and their corresponding characters
 	for language, codes in encodes.items():
@@ -171,7 +172,7 @@ def chart(*, dot: OptionalStr = '·', dash: OptionalStr = '-') -> None:
 		print('\n' + '-' * 15)
 
 
-def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
+def play(code: str, /, delay: float = 0.5, volume: float = 1.0, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
          separator: OptionalStr = '/') -> None:
 	"""
 	Play Morse code sound.
@@ -188,28 +189,28 @@ def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: OptionalStr
 
 	# Error Handling: Ensure that dot, dash, and separator have only one symbol
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
-		logging.error(error_message1)
+		logging.error(ERROR_MESSAGE1)
 		return
 
 	# Error Handling: Ensure that delay is smaller than 1.0
 	if delay > 1.0:
-		logging.warning(warning_message1)
+		logging.warning(WARNING_MESSAGE1)
 
 	# Error Handling: Ensure that delay is smaller than 1.0
 	if delay < 0.3:
-		logging.error(error_message4)
+		logging.error(ERROR_MESSAGE4)
 		return
 
 	# Error Handling: Ensure that volume is within the valid range
 	if not 0.0 < volume <= 1.0:
-		logging.error(error_message3)
+		logging.error(ERROR_MESSAGE3)
 		return
 
 	# Separate the string into individual Morse code characters
 	characters: List[str] = separate_letters(separate_words(code.strip(), dot, dash, separator, sound_mode=True))
 
 	# Initialize audio manager
-	audio_manager = AudioManager(volume=volume)
+	audio_manager: AudioManager = AudioManager(volume=volume)
 
 	try:
 		for character in characters:
@@ -228,5 +229,5 @@ def play(code: str, delay: float = 0.5, volume: float = 1.0, *, dot: OptionalStr
 					audio_manager.play_error()
 					sleep(delay / 1.5)
 	except KeyboardInterrupt:
-		logging.warning(warning_message2)
+		logging.warning(WARNING_MESSAGE2)
 		return
