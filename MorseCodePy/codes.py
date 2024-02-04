@@ -1,9 +1,7 @@
 import json
 from os import path
-from typing import Dict
 
-# Custom type
-type JSONDict = Dict[str, Dict[str, str]]
+from .utilities import JSONDict
 
 
 def get_encodes() -> JSONDict:
@@ -13,7 +11,7 @@ def get_encodes() -> JSONDict:
 	:returns: A dictionary containing Morse code encodings.
 	"""
 
-	file_path = path.join(path.dirname(path.abspath(__file__)), 'codes', 'encodes.json')
+	file_path: str = path.join(path.dirname(path.abspath(__file__)), 'codes', 'encodes.json')
 
 	with open(file_path, 'r', encoding='utf-8') as file:
 		return json.load(file)
@@ -26,7 +24,7 @@ def get_decodes() -> JSONDict:
 	:returns: A dictionary containing Morse code decodings.
 	"""
 
-	file_path = path.join(path.dirname(path.abspath(__file__)), 'codes', 'decodes.json')
+	file_path: str = path.join(path.dirname(path.abspath(__file__)), 'codes', 'decodes.json')
 
 	with open(file_path, 'r', encoding='utf-8') as file:
 		return json.load(file)

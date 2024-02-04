@@ -1,7 +1,6 @@
 import logging
 from io import StringIO
 from time import sleep
-from typing import Literal
 
 from .audio_manager import AudioManager
 from .codes import get_encodes, get_decodes
@@ -11,15 +10,9 @@ from .utilities import *
 # Setup logging
 setup_logging(level=logging.WARNING)
 
-# Custom types
-type StrOrNone = str | None
-type OptionalStr = Optional[str]
-type Language = Literal['english', 'spanish', 'french', 'russian', 'ukrainian', 'numbers', 'special']
-type JSONDict = Dict[str, Dict[str, str]]
-
 
 def encode(string: str, /, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
-           separator: OptionalStr = '/', error: OptionalStr = '*') -> StrOrNone:
+           separator: OptionalStr = '/', error: OptionalStr = '*') -> str | None:
 	"""
 	Encodes the string into Morse code.
 
@@ -75,7 +68,7 @@ def encode(string: str, /, language: Language, *, dot: OptionalStr = '.', dash: 
 
 
 def decode(code: str, /, language: Language, *, dot: OptionalStr = '.', dash: OptionalStr = '-',
-           separator: OptionalStr = '/', error: OptionalStr = '*') -> StrOrNone:
+           separator: OptionalStr = '/', error: OptionalStr = '*') -> str | None:
 	"""
 	Decode the Morse code into a string.
 
@@ -178,8 +171,8 @@ def play(code: str, /, delay: float = 0.5, volume: float = 1.0, *, dot: Optional
 	Play Morse code sound.
 
 	:parameter code: The Morse code string to play.
-	:parameter delay: The delay in seconds between each Morse code symbol (default is 0.4).
-	:parameter volume: The volume of the Morse code playback (default is 0.5).
+	:parameter delay: The delay in seconds between each Morse code symbol (default is 0.5).
+	:parameter volume: The volume of the Morse code playback (default is 1.0).
 	:parameter dot: Symbol representing a dot (default is '.').
 	:parameter dash: Symbol representing a dash (default is '-').
 	:parameter separator: Symbol representing a separator (default is '/').
