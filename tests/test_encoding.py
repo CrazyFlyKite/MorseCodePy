@@ -1,6 +1,6 @@
 import unittest
 
-from MorseCodePy.main import encode
+from MorseCodePy.encode import encode
 
 
 class TestEncoding(unittest.TestCase):

@@ -31,7 +31,6 @@ class AudioManager:
 		# Initialize the pygame mixer
 		mixer.init()
 
-	# volume
 	@property
 	def volume(self) -> float:
 		return self.__volume
@@ -40,22 +39,18 @@ class AudioManager:
 	def volume(self, value: Any) -> None:
 		self.__volume = float(value)
 
-	# directory
 	@property
 	def directory(self) -> PathLikeString:
 		return self.__directory
 
-	# dot_sound_file
 	@property
 	def dot_sound_file(self) -> PathLikeString:
 		return self.__dot_sound_file
 
-	# dash_sound_file
 	@property
 	def dash_sound_file(self) -> PathLikeString:
 		return self.__dash_sound_file
 
-	# error_sound_file
 	@property
 	def error_sound_file(self) -> PathLikeString:
 		return self.__error_sound_file

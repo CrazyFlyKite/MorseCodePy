@@ -11,7 +11,6 @@ WARNING_MESSAGE1: Final[str] = 'Long Delay - The specified delay is longer than 
 WARNING_MESSAGE2: Final[str] = 'Keyboard Interrupt - Morse code playback interrupted by user.'
 
 # Custom types
-OptionalStr: TypeAlias = Optional[str]
 Language: TypeAlias = Literal['english', 'spanish', 'french', 'russian', 'ukrainian', 'numbers', 'special']
 JSONDict: TypeAlias = Dict[str, Dict[str, str]]
 PathLikeString: TypeAlias = str | bytes | PathLike

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 
-from MorseCodePy.main import play
+from MorseCodePy.play import play
 
 
 class TestAudioPlay(unittest.TestCase):

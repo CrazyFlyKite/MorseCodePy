@@ -2,7 +2,7 @@ import unittest
 from io import StringIO
 from unittest.mock import patch, Mock
 
-from MorseCodePy.main import chart
+from MorseCodePy.chart import chart
 
 
 class TestChart(unittest.TestCase):
@@ -10,8 +10,8 @@ class TestChart(unittest.TestCase):
 	def test_chart(self, mock_stdout: Mock):
 		chart()
 
-		chart_output = mock_stdout.getvalue()
-		expected_output = '''Morse Code Chart
+		chart_output: str = mock_stdout.getvalue()
+		expected_output = r'''Morse Code Chart
 
 ---------------
 
@@ -221,12 +221,12 @@ Special
 ?     ··--··
 @     ·--·-·
 /     -··-·
-\\     -··-·
+\     -··-·
 &     ·-···
 ;     -·-·-·
 :     ---···
-\"     ·-··-·
-\'     ·----·
+"     ·-··-·
+'     ·----·
 $     ···-··-
 +     ·-·-·
 -     -····-
