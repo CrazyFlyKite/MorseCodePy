@@ -1,4 +1,5 @@
 import logging
+from io import StringIO
 from typing import Optional
 
 from .codes import get_encodes
@@ -20,20 +21,19 @@ def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 		logging.error(ERROR_MESSAGE1)
 		return
 
-	print('Morse Code Chart\n')
-	print('-' * 15)
-
-	# Get encodes dictionary
+	string_io: StringIO = StringIO()
 	encodes: JSONDict = get_encodes()
 
-	# Iterate through the language codes and their corresponding characters
+	string_io.write('Morse Code Chart\n\n' + '-' * 15 + '\n')
+
 	for language, codes in encodes.items():
-		print('\n' + language.capitalize())
+		string_io.write('\n' + language.capitalize() + '\n')
 
-		# Print characters and their Morse code representations
 		for character, code in codes.items():
-			if code not in {'\n', ' '}:
+			if code not in '\n ':
 				code = code.replace('.', dot).replace('-', dash)
-				print(f'{character:<5} {code}')
+				string_io.write(f'{character:<5} {code}\n')
 
-		print('\n' + '-' * 15)
+		string_io.write('\n' + '-' * 15 + '\n')
+
+	print(string_io.getvalue().rstrip())
