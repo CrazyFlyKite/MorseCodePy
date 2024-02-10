@@ -27,4 +27,4 @@ def get_decodes() -> JSONDict:
 	file_path: str = path.join(path.dirname(path.abspath(__file__)), 'codes', 'decodes.json')
 
 	with open(file_path, 'r', encoding='utf-8') as file:
-		return json.load(file)
+		return {key: {v: k for k, v in value.items()} for key, value in json.load(file).items()}

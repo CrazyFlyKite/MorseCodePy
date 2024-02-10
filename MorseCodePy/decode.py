@@ -51,9 +51,9 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 	string_io: StringIO = StringIO()
 
 	# Create dictionaries to map Morse code to characters for the selected language
-	reversed_codes: Dict[str, str] = reverse_dictionary(decodes[language])
-	reversed_numbers: Dict[str, str] = reverse_dictionary(decodes['numbers'])
-	reversed_special: Dict[str, str] = reverse_dictionary(decodes['special'])
+	reversed_codes: Dict[str, str] = decodes[language]
+	reversed_numbers: Dict[str, str] = decodes['numbers']
+	reversed_special: Dict[str, str] = decodes['special']
 
 	for letter in letters:
 		if letter == '----' and language in {'english', 'spanish', 'french'}:

@@ -66,15 +66,3 @@ def separate_letters(letters: List[str], /) -> List[str]:
 	"""
 
 	return [character for letter in letters for character in letter]
-
-
-def reverse_dictionary(dictionary: Dict, /) -> Dict:
-	"""
-	Reverse the keys and values of a dictionary.
-
-	:parameter dictionary: The input dictionary to be processed.
-
-	:returns: A dictionary with reversed keys and values.
-	"""
-
-	return {value: key for key, value in dictionary.items()}
