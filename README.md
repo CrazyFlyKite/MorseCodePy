@@ -80,11 +80,11 @@ Play Morse code sound.
 - `separator`: *(optional)* Symbol to represent separators (default is `/`).
 
 ```python
-from MorseCodePy import encode, play
+from MorseCodePy import encode, play_pygame
 
 encoded_string: str = encode('Hello', language='english')
 
-play(encoded_string, delay=0.5, volume=0.8)
+play_pygame(encoded_string, delay=0.5, volume=0.8)
 ```
 
 ___

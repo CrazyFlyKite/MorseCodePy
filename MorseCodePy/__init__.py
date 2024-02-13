@@ -2,7 +2,7 @@
 from .chart import chart
 from .decode import decode
 from .encode import encode
-from .play import play
+from .play_pygame import play_pygame
 from .setup_logging import setup_logging
 
 """
