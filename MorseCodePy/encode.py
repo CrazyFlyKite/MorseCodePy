@@ -1,7 +1,6 @@
 import logging
 from io import StringIO
 
-from .codes import get_encodes
 from .utilities import *
 
 
@@ -17,7 +16,6 @@ def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash
 	:parameter separator: The symbol used to separate words.
 	:parameter error: The symbol to represent errors when the index is not found in the dictionary.
 
-	:rtype: str
 	:returns: The Morse code representation of the input string.
 	"""
 

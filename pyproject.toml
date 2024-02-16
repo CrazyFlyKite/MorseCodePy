@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 name = "MorseCodePy"
 version = "3.8"
 description = "Encode, decode & play Morse code easily"
-dependencies = ["pygame>=2.5.2"]
+dependencies = ["pygame>=2.5.2", "playsound>=1.3.0"]
 requires-python = ">=3.11"
 authors = [{ name = "CrazyFlyKite", email = "karpenkoartem2846@gmail.com" }]
 readme = "README.md"

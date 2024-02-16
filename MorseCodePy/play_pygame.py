@@ -1,11 +1,10 @@
 # Hide the pygame support prompt
-from os import environ, path
+from os import environ
 
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 import logging
 from time import sleep
-
 from pygame import mixer
 
 from .utilities import *
@@ -31,7 +30,8 @@ class AudioManager:
 		self.__dash_sound_file = dash_sound_file
 		self.__error_sound_file = error_sound_file
 
-		mixer.init()  # Initialize pygame version
+		# Initialize the pygame mixer
+		mixer.init()
 
 	@property
 	def volume(self) -> float:
@@ -48,24 +48,24 @@ class AudioManager:
 		self.__volume = float(value)
 
 	@property
-	def directory(self) -> PathLikeString:
+	def directory(self) -> str:
 		return str(self.__directory)
 
 	@property
-	def dot_sound_file(self) -> PathLikeString:
+	def dot_sound_file(self) -> str:
 		return str(self.__dot_sound_file)
 
 	@property
-	def dash_sound_file(self) -> PathLikeString:
+	def dash_sound_file(self) -> str:
 		return str(self.__dash_sound_file)
 
 	@property
-	def error_sound_file(self) -> PathLikeString:
+	def error_sound_file(self) -> str:
 		return str(self.__error_sound_file)
 
 	def _load(self, filename: PathLikeString) -> None:
 		if not path.exists(sound_path := path.join(path.dirname(__file__), self.directory, filename)):
-			raise FileNotFoundError(f'Sound file {filename} not found')
+			raise FileNotFoundError(f'Sound file {filename} not found!')
 
 		mixer.music.load(sound_path)
 		mixer.music.set_volume(self.volume)
@@ -107,7 +107,7 @@ def play_pygame(code: str, /, delay: float = 0.5, volume: float = 1.0, *, dot: O
 	:parameter dash: Symbol representing a dash (default is '-').
 	:parameter separator: Symbol representing a separator (default is '/').
 
-	:returns: None
+	:returns: `None`
 	"""
 
 	# Error Handling: Ensure that dot, dash, and separator have only one symbol

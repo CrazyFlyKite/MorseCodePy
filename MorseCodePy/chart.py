@@ -1,9 +1,7 @@
 import logging
 from io import StringIO
-from typing import Optional
 
-from .codes import get_encodes
-from .utilities import JSONDict, ERROR_MESSAGE1
+from .utilities import *
 
 
 def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
@@ -13,7 +11,7 @@ def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 	:parameter dot: The symbol to represent dots in the chart.
 	:parameter dash: The symbol to represent dashes in the chart.
 
-	:returns: None
+	:returns: `None`
 	"""
 
 	# Error Handling: Ensure that dot, dash, and separator have only one symbol
