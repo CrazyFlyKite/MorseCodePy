@@ -2,6 +2,7 @@ from .chart import chart
 from .decode import decode
 from .encode import encode
 from .play_pygame import play_pygame
+from .play_sounddevice import play_sounddevice
 
 """
 MorseCodePy: Python Morse Code Helper

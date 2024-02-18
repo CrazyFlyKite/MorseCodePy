@@ -27,7 +27,7 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 
 	# Error handling: Ensure that language is a valid string
 	if language not in decodes:
-		logging.error(ERROR_MESSAGE5)
+		logging.error(ERROR_MESSAGE6)
 		return
 
 	# Error Handling: Ensure that dot, dash, and separator have only one symbol

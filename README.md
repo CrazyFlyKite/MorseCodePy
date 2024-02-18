@@ -10,7 +10,8 @@
 ## Introduction
 
 **MorseCodePy** is a versatile Python module that streamlines the **encoding** and **decoding**
-of text into Morse code and back. With support for multiple languages, including **English**, **Russian**, **Ukrainian**,
+of text into Morse code and back. With support for multiple languages, including **English**, **Russian**, **Ukrainian
+**,
 **Spanish**, **French**, as well as provisions for handling **numbers** and other **special characters**, this module
 offers a powerful and **user-friendly** Morse code tool.
 ___
@@ -22,8 +23,7 @@ ___
 Encode a text string into Morse code.
 
 - `string`: The text string you want to encode.
-- `language`: The target language for encoding (
-  e.g., `english`, `french`, `spanish`, `russian`, `ukranian`, `numbers`, `special`).
+- `language`: The target language for encoding (e.g., `english`, `french`, `spanish`, `russian`, `ukranian`, `numbers`, `special`).
 - `dot`: *(optional)* Symbol to represent dots (default is `.`).
 - `dash`: *(optional)* Symbol to represent dashes (default is `-`).
 - `error`: *(optional)* Symbol to represent errors when an unknown character is encountered (default is `*`).
@@ -52,8 +52,7 @@ ___
 Decode Morse code into a text string.
 
 - `code`: The Morse code string you want to decode.
-- `language`: The target language for decoding (
-  e.g., `english`, `french`, `spanish`, `russian`, `ukranian`, `numbers`, `special`).
+- `language`: The target language for decoding (e.g., `english`, `french`, `spanish`, `russian`, `ukranian`, `numbers`, `special`).
 - `dot`: *(optional)* Symbol to represent dots (default is `.`).
 - `dash`: *(optional)* Symbol to represent dashes (default is `-`).
 - `error`: *(optional)* Symbol to represent errors when an unknown Morse code sequence is encountered (default is `*`).
@@ -68,13 +67,13 @@ print(decoded_string)
 
 ___
 
-#### `play(code, /, delay, volume, *, dot, dash, separator)`
+#### `play_pygame(code, /, delay, volume, *, dot, dash, separator)`
 
-Play Morse code sound.
+Play Morse code sound using `pygame`.
 
 - `code`: The Morse code you want to play.
-- `delay`: *(optional)* The delay in seconds between characters (default is **0.5**).
-- `volume`: *(optional)* The volume of the Morse code playback (default is **1.0**).
+- `delay`: *(optional)* The delay in seconds between characters (default is **0.3**).
+- `volume`: *(optional)* The volume of the Morse code playback (default is **0.5**).
 - `dot`: *(optional)* Symbol to represent dots (default is `.`).
 - `dash`: *(optional)* Symbol to represent dashes (default is `-`).
 - `separator`: *(optional)* Symbol to represent separators (default is `/`).
@@ -85,6 +84,27 @@ from MorseCodePy import encode, play_pygame
 encoded_string: str = encode('Hello', language='english')
 
 play_pygame(encoded_string, delay=0.5, volume=0.8)
+```
+
+___
+
+#### `play_sounddevice(code, /, delay, volume, *, dot, dash, separator)`
+
+Play Morse code sound using `sounddevice`.
+
+- `code`: The Morse code you want to play.
+- `delay`: *(optional)* The delay in seconds between characters (default is **0.3**).
+- `volume`: *(optional)* The volume of the Morse code playback (default is **0.5**).
+- `dot`: *(optional)* Symbol to represent dots (default is `.`).
+- `dash`: *(optional)* Symbol to represent dashes (default is `-`).
+- `separator`: *(optional)* Symbol to represent separators (default is `/`).
+
+```python
+from MorseCodePy import encode, play_sounddevice
+
+text: str = encode('Bonjour !', language='french')
+
+play_sounddevice(text, volume=1.5)
 ```
 
 ___
