@@ -115,7 +115,3 @@ def play_sounddevice(code: str, /, delay: float = 0.3, volume: float = 0.5, *, d
 	except KeyboardInterrupt:
 		logging.warning(WARNING_MESSAGE2)
 		return
-
-
-if __name__ == '__main__':
-	play_sounddevice('.-. 0 .')

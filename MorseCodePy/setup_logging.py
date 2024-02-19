@@ -3,10 +3,6 @@ from typing import Dict, Optional
 
 
 class ColoredFormatter(logging.Formatter):
-	"""
-	A custom log formatter that adds color to log messages based on their severity.
-	"""
-
 	def format(self, record: logging.LogRecord) -> str:
 		colors: Dict[int, str] = {
 			logging.DEBUG: '\033[37m',  # White
@@ -20,14 +16,14 @@ class ColoredFormatter(logging.Formatter):
 		return super().format(record)
 
 
-def setup_logging(level: int, logging_format: Optional[str] = '%(levelname)s - %(message)s') -> None:
+def setup_logging(level: int = logging.INFO, logging_format: Optional[str] = '%(levelname)s - %(message)s') -> None:
 	"""
 	Set up colored console logging with the specified logging level.
 
-	:parameter level: The logging level (e.g., logging.DEBUG, logging.INFO) to set for the root logger.
+	:parameter level: The logging level (e.g., logging.DEBUG, logging.INFO) to set for the root logger (default is logging.INFO).
 	:parameter logging_format: The format that will be used when using logging.
 
-	:returns: None
+	:returns: `None`
 	"""
 
 	# Setup StreamHandler
