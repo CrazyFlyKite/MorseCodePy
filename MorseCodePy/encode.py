@@ -5,7 +5,7 @@ from .utilities import *
 
 
 def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
-           separator: Optional[str] = '/', error: Optional[str] = '*') -> str | None:
+           separator: Optional[str] = '/', error: Optional[str] = '*') -> Optional[str]:
 	"""
 	Encodes the string into Morse code.
 
@@ -44,16 +44,16 @@ def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash
 		if ch_handler:
 			string_io.write(dash * 4 + ' ')
 			ch_handler = False
-		elif string[index] == 'c' and string[index + 1] == 'h':
+		elif character == 'c' and string[index + 1] == 'h':
 			ch_handler = True
 		elif character == ' ':
 			string_io.write(separator + ' ')
-		elif character in encodes[language]:
-			string_io.write(encodes[language][character] + ' ')
-		elif character in encodes['numbers']:
-			string_io.write(encodes['numbers'][character] + ' ')
-		elif character in encodes['special']:
-			string_io.write(encodes['special'][character] + ' ')
+		elif character in encodes.get(language):
+			string_io.write(encodes.get(language).get(character) + ' ')
+		elif character in encodes.get('numbers'):
+			string_io.write(encodes.get('numbers').get(character) + ' ')
+		elif character in encodes.get('special'):
+			string_io.write(encodes.get('special').get(character) + ' ')
 		else:
 			string_io.write(error + ' ')
 

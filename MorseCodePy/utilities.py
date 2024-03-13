@@ -1,6 +1,7 @@
 import json
 from os import PathLike, path
-from typing import TypeAlias, List, Dict, Optional, Final, Literal
+from pprint import pprint
+from typing import TypeAlias, List, Dict, Optional, Final, Literal, TypeVar
 
 # Error and warning messages
 ERROR_MESSAGE1: Final[str] = 'Invalid Symbols - Dots, dashes, and separators must be single characters!'
@@ -17,8 +18,15 @@ Language: TypeAlias = Literal['english', 'spanish', 'french', 'russian', 'ukrain
 JSONDict: TypeAlias = Dict[str, Dict[str, str]]
 PathLikeString: TypeAlias = str | bytes | PathLike
 
+# Generic types
+KT = TypeVar('KT')
+VT = TypeVar('VT')
 
 # Useful functions
+def reverse_dictionary(dictionary: Dict[KT, VT], /) -> Dict[VT, KT]:
+	return {value: key for key, value in dictionary.items()}
+
+
 def get_encodes() -> JSONDict:
 	"""
 	Load the Morse code encodings from the "encodes.json".
@@ -42,7 +50,8 @@ def get_decodes() -> JSONDict:
 	file_path: str = path.join(path.dirname(path.abspath(__file__)), 'codes', 'decodes.json')
 
 	with open(file_path, 'r', encoding='utf-8') as file:
-		return {key: {v: k for k, v in value.items()} for key, value in json.load(file).items()}
+		return {key: reverse_dictionary(value) for key, value in json.load(file).items()}
+
 
 def separate_words(words: str, /, dot: str, dash: str, separator: str, *, sound_mode: Optional[bool] = False) -> List[str]:
 	"""

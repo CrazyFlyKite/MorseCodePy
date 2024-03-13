@@ -5,7 +5,7 @@ from .utilities import *
 
 
 def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
-           separator: Optional[str] = '/', error: Optional[str] = '*') -> str | None:
+           separator: Optional[str] = '/', error: Optional[str] = '*') -> Optional[str]:
 	"""
 	Decode the Morse code into a string.
 
@@ -49,11 +49,6 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 	# Translating Morse Code into normal text
 	string_io: StringIO = StringIO()
 
-	# Create dictionaries to map Morse code to characters for the selected language
-	reversed_codes: Dict[str, str] = decodes[language]
-	reversed_numbers: Dict[str, str] = decodes['numbers']
-	reversed_special: Dict[str, str] = decodes['special']
-
 	for letter in letters:
 		if letter == '----' and language in {'english', 'spanish', 'french'}:
 			string_io.write('ch')
@@ -61,12 +56,12 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 			string_io.write(' ')
 		elif letter == '\n':
 			string_io.write(letter)
-		elif letter in reversed_codes:
-			string_io.write(reversed_codes[letter])
-		elif letter in reversed_numbers and language != 'special':
-			string_io.write(reversed_numbers[letter])
-		elif letter in reversed_special and language != 'numbers':
-			string_io.write(reversed_special[letter])
+		elif letter in decodes.get(language):
+			string_io.write(decodes.get(language).get(letter))
+		elif letter in decodes.get('numbers') and language != 'special':
+			string_io.write(decodes.get('numbers').get(letter))
+		elif letter in decodes.get('special') and language != 'numbers':
+			string_io.write(decodes.get('special').get(letter))
 		else:
 			string_io.write(error)
 

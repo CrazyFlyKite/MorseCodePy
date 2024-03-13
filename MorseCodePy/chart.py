@@ -22,6 +22,7 @@ def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 	string_io: StringIO = StringIO()
 	encodes: JSONDict = get_encodes()
 
+	# Write
 	string_io.write('Morse Code Chart\n\n' + '-' * 15 + '\n')
 
 	for language, codes in encodes.items():
@@ -34,4 +35,5 @@ def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 
 		string_io.write('\n' + '-' * 15 + '\n')
 
+	# Output
 	print(string_io.getvalue().rstrip())
