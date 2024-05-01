@@ -14,13 +14,14 @@ def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 	:returns: `None`
 	"""
 
-	# Error Handling: Ensure that dot, dash, and separator have only one symbol
+	# Error Handling
 	if any(len(symbol) != 1 for symbol in {dot, dash}):
 		logging.error(ERROR_MESSAGE1)
 		return
 
+	# Initialize variables
 	string_io: StringIO = StringIO()
-	encodes: JSONDict = get_encodes()
+	encodes: JSONDictionary = get_encodes()
 
 	# Write
 	string_io.write('Morse Code Chart\n\n' + '-' * 15 + '\n')

@@ -16,7 +16,7 @@ class ColoredFormatter(logging.Formatter):
 		return super().format(record)
 
 
-def setup_logging(level: int = logging.INFO, logging_format: Optional[str] = '%(levelname)s - %(message)s') -> None:
+def setup_logging(level: int = logging.INFO, logging_format: Optional[str] = '[%(levelname)s] - %(message)s') -> None:
 	"""
 	Set up colored console logging with the specified logging level.
 

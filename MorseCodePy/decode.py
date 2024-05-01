@@ -19,35 +19,29 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 	:returns: The decoded string.
 	"""
 
-	# Ensure that language doesn't contain any useless spaces, newlines or tabs
+	# Format code and language
+	code = code.strip().replace(dot, '.').replace(dash, '-')
 	language = language.lower().strip()
 
-	# Get decodes dictionary
-	decodes: JSONDict = get_decodes()
+	# Initialize variables
+	decodes: JSONDictionary = get_decodes()
+	string_io: StringIO = StringIO()
 
-	# Error handling: Ensure that language is a valid string
+	# Error handling
 	if language not in decodes:
 		logging.error(ERROR_MESSAGE6)
 		return
 
-	# Error Handling: Ensure that dot, dash, and separator have only one symbol
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
 		logging.error(ERROR_MESSAGE1)
 		return
 
-	# Error Handling: Ensure that the input string contains only valid Morse code symbols
 	if any(character not in {dot, dash, separator, ' ', '\n'} for character in code):
 		logging.error(ERROR_MESSAGE2)
 		return
 
-	# Replacing characters in code for consistent decoding
-	code = code.strip().replace(dot, '.').replace(dash, '-')
-
-	# Separating String: Split the input Morse code into letters and separators
+	# Write
 	letters: List[str] = separate_words(code, dot, dash, separator)
-
-	# Translating Morse Code into normal text
-	string_io: StringIO = StringIO()
 
 	for letter in letters:
 		if letter == '----' and language in {'english', 'spanish', 'french'}:

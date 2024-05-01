@@ -26,40 +26,41 @@ class AudioManagerPygame:
 		:parameter error_sound_file: The filename of the sound file for error messages (default is 'error.wav').
 		"""
 
-		self.__volume = volume
-		self.__directory = directory
-		self.__dot_sound_file = dot_sound_file
-		self.__dash_sound_file = dash_sound_file
-		self.__error_sound_file = error_sound_file
+		self._volume = volume
+		self._directory = directory
+		self._dot_sound_file = dot_sound_file
+		self._dash_sound_file = dash_sound_file
+		self._error_sound_file = error_sound_file
 
-		self.__audio_cache = {}
+		self._audio_cache = {}
 
 		# Initialize the pygame mixer
 		pygame.init()
 		pygame.mixer.init()
 
 	def _load_sound(self, filename: PathLikeString) -> None:
-		if not path.exists(sound_path := path.join(path.dirname(__file__), self.__directory, filename)):
+		if not path.exists(sound_path := path.join(path.dirname(__file__), self._directory, filename)):
 			raise FileNotFoundError(f'Sound file {filename} not found!')
 
 		pygame.mixer.music.load(sound_path)
-		pygame.mixer.music.set_volume(self.__volume)
+		pygame.mixer.pre_init(44100, -16, 2, 2048)
+		pygame.mixer.music.set_volume(self._volume)
 
 	def _load_all_sounds(self) -> None:
-		for filename in (self.__dot_sound_file, self.__dash_sound_file, self.__error_sound_file):
+		for filename in (self._dot_sound_file, self._dash_sound_file, self._error_sound_file):
 			self._load_sound(filename)
-			self.__audio_cache[filename] = mixer.Sound()  # NOQA
+			self._audio_cache[filename] = mixer.Sound()  # NOQA
 
 	def play_dot(self) -> None:
-		self._load_sound(self.__dot_sound_file)
+		self._load_sound(self._dot_sound_file)
 		pygame.mixer.music.play()
 
 	def play_dash(self) -> None:
-		self._load_sound(self.__dash_sound_file)
+		self._load_sound(self._dash_sound_file)
 		pygame.mixer.music.play()
 
 	def play_error(self) -> None:
-		self._load_sound(self.__error_sound_file)
+		self._load_sound(self._error_sound_file)
 		pygame.mixer.music.play()
 
 
@@ -78,21 +79,18 @@ def play_pygame(code: str, /, delay: float = 0.5, volume: float = 0.5, *, dot: O
 	:returns: `None`
 	"""
 
-	# Error Handling: Ensure that dot, dash, and separator have only one symbol
+	# Error Handling
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
 		logging.error(ERROR_MESSAGE1)
 		return
 
-	# Error Handling: Ensure that delay is smaller than 1.0
 	if delay > 1.0:
 		logging.warning(WARNING_MESSAGE1)
 
-	# Error Handling: Ensure that delay is smaller than 1.0
 	if delay < 0.3:
 		logging.error(ERROR_MESSAGE5)
 		return
 
-	# Error Handling: Ensure that volume is within the valid range
 	if not 0.0 < volume <= 3.0:
 		logging.error(ERROR_MESSAGE4)
 		return

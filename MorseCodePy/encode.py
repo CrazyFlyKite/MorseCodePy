@@ -19,12 +19,13 @@ def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash
 	:returns: The Morse code representation of the input string.
 	"""
 
-	# Ensure that code and language don't contain any useless spaces, newlines or tabs
+	# Format string and language
 	string = string.lower().strip()
 	language = language.lower().strip()
 
-	# Get encodes dictionary
-	encodes: JSONDict = get_encodes()
+	# Initialize variables
+	string_io: StringIO = StringIO()
+	encodes: JSONDictionary = get_encodes()
 
 	# Error handling: Ensure that language is a valid string
 	if not isinstance(language, str) or language not in encodes:
@@ -36,9 +37,7 @@ def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash
 		logging.error(ERROR_MESSAGE1)
 		return
 
-	# Translating string into Morse code
-	string_io: StringIO = StringIO()
-
+	# Write
 	ch_handler: bool = False
 	for index, character in enumerate(string):
 		if ch_handler:

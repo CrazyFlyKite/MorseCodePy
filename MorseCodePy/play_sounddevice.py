@@ -22,38 +22,38 @@ class AudioManagerSounddevice:
 		:parameter error_sound_file: The filename of the sound file for error messages (default is 'error.wav').
 		"""
 
-		self.__volume = volume
-		self.__directory = directory
-		self.__dot_sound_file = dot_sound_file
-		self.__dash_sound_file = dash_sound_file
-		self.__error_sound_file = error_sound_file
+		self._volume = volume
+		self._directory = directory
+		self._dot_sound_file = dot_sound_file
+		self._dash_sound_file = dash_sound_file
+		self._error_sound_file = error_sound_file
 
-		self.__audio_cache = {}
+		self._audio_cache = {}
 
 	def _load_sound(self, filename: PathLikeString) -> None:
-		if filename not in self.__audio_cache:
-			if not path.exists(sound_path := path.join(path.dirname(__file__), self.__directory, filename)):
+		if filename not in self._audio_cache:
+			if not path.exists(sound_path := path.join(path.dirname(__file__), self._directory, filename)):
 				raise FileNotFoundError(f'Sound file {filename} not found!')
 
 			data, frequency = soundfile.read(sound_path)
-			self.__audio_cache[filename] = (data, frequency)
+			self._audio_cache[filename] = (data, frequency)
 
 	def _play(self, filename: PathLikeString) -> None:
-		if filename not in self.__audio_cache:
+		if filename not in self._audio_cache:
 			self._load_sound(filename)
 
-		data, frequency = self.__audio_cache[filename]
-		sounddevice.play(data * self.__volume, frequency)
+		data, frequency = self._audio_cache[filename]
+		sounddevice.play(data * self._volume, frequency)
 		sounddevice.wait()
 
 	def play_dot(self) -> None:
-		self._play(self.__dot_sound_file)
+		self._play(self._dot_sound_file)
 
 	def play_dash(self) -> None:
-		self._play(self.__dash_sound_file)
+		self._play(self._dash_sound_file)
 
 	def play_error(self) -> None:
-		self._play(self.__error_sound_file)
+		self._play(self._error_sound_file)
 
 
 def play_sounddevice(code: str, /, delay: float = 0.3, volume: float = 0.5, *, dot: Optional[str] = '.',
@@ -71,21 +71,18 @@ def play_sounddevice(code: str, /, delay: float = 0.3, volume: float = 0.5, *, d
 	:returns: `None`
 	"""
 
-	# Error Handling: Ensure that dot, dash, and separator have only one symbol
+	# Error Handling
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):
 		logging.error(ERROR_MESSAGE1)
 		return
 
-	# Error Handling: Ensure that delay is smaller than 1.0
 	if delay > 1.0:
 		logging.warning(WARNING_MESSAGE1)
 
-	# Error Handling: Ensure that delay is smaller than 1.0
 	if delay < 0.3:
 		logging.error(ERROR_MESSAGE5)
 		return
 
-	# Error Handling: Ensure that volume is within the valid range
 	if not 0.0 < volume <= 3.0:
 		logging.error(ERROR_MESSAGE3)
 		return

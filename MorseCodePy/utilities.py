@@ -1,6 +1,5 @@
 import json
 from os import PathLike, path
-from pprint import pprint
 from typing import TypeAlias, List, Dict, Optional, Final, Literal, TypeVar
 
 # Error and warning messages
@@ -15,19 +14,28 @@ WARNING_MESSAGE2: Final[str] = 'Keyboard Interrupt - Morse code playback interru
 
 # Custom types
 Language: TypeAlias = Literal['english', 'spanish', 'french', 'russian', 'ukrainian', 'numbers', 'special']
-JSONDict: TypeAlias = Dict[str, Dict[str, str]]
-PathLikeString: TypeAlias = str | bytes | PathLike
+JSONDictionary: TypeAlias = Dict[str, Dict[str, str]]
+PathLikeString: TypeAlias = str | PathLike
 
 # Generic types
 KT = TypeVar('KT')
 VT = TypeVar('VT')
 
+
 # Useful functions
 def reverse_dictionary(dictionary: Dict[KT, VT], /) -> Dict[VT, KT]:
+	"""
+	Reverse a dictionary.
+
+	:parameter dictionary: The input dictionary to be processed.
+
+	:returns: A list of individual Morse code characters.
+	"""
+
 	return {value: key for key, value in dictionary.items()}
 
 
-def get_encodes() -> JSONDict:
+def get_encodes() -> JSONDictionary:
 	"""
 	Load the Morse code encodings from the "encodes.json".
 
@@ -40,7 +48,7 @@ def get_encodes() -> JSONDict:
 		return json.load(file)
 
 
-def get_decodes() -> JSONDict:
+def get_decodes() -> JSONDictionary:
 	"""
 	Load the Morse code decodings from the "decodes.json".
 
@@ -53,7 +61,8 @@ def get_decodes() -> JSONDict:
 		return {key: reverse_dictionary(value) for key, value in json.load(file).items()}
 
 
-def separate_words(words: str, /, dot: str, dash: str, separator: str, *, sound_mode: Optional[bool] = False) -> List[str]:
+def separate_words(words: str, /, dot: str, dash: str, separator: str, *,
+                   sound_mode: Optional[bool] = False) -> List[str]:
 	"""
 	Separate a string into Morse code letters.
 

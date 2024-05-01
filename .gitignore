@@ -2,7 +2,7 @@
 __pycache__/
 *.pyc
 
-# PyPI
+# PyPI login and password
 .pypirc
 
 # Virtual environment

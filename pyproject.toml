@@ -22,8 +22,8 @@ classifiers = [
 
 [project.urls]
 Repository = "https://github.com/CrazyFlyKite/MorseCodePy"
-Bug-Tracker = "https://github.com/CrazyFlyKite/MorseCodePy/issues"
-PyPI = "https://pypi.org/project/MorseCodePy"
+Tracker = "https://github.com/CrazyFlyKite/MorseCodePy/issues"
+Download = "https://pypi.org/project/MorseCodePy"
 
 [options]
 packages = ["MorseCodePy"]

@@ -10,8 +10,7 @@
 ## Introduction
 
 **MorseCodePy** is a versatile Python module that streamlines the **encoding** and **decoding**
-of text into Morse code and back. With support for multiple languages, including **English**, **Russian**, **Ukrainian
-**,
+of text into Morse code and back. With support for multiple languages, including **English**, **Russian**, **Ukrainian**,
 **Spanish**, **French**, as well as provisions for handling **numbers** and other **special characters**, this module
 offers a powerful and **user-friendly** Morse code tool.
 ___
