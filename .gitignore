@@ -2,9 +2,6 @@
 __pycache__/
 *.pyc
 
-# Legacy functionality
-Legacy/
-
 # PyPI login and password
 .pypirc
 
