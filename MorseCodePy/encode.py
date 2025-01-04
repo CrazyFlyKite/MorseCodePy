@@ -48,11 +48,11 @@ def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash
 		elif character == ' ':
 			string_io.write(separator + ' ')
 		elif character in encodes.get(language):
-			string_io.write(encodes.get(language).get(character) + ' ')
+			string_io.write(encodes.get(language).get(character).replace('.', dot).replace('-', dash) + ' ')
 		elif character in encodes.get('numbers'):
-			string_io.write(encodes.get('numbers').get(character) + ' ')
+			string_io.write(encodes.get('numbers').get(character).replace('.', dot).replace('-', dash) + ' ')
 		elif character in encodes.get('special'):
-			string_io.write(encodes.get('special').get(character) + ' ')
+			string_io.write(encodes.get('special').get(character).replace('.', dot).replace('-', dash) + ' ')
 		else:
 			string_io.write(error + ' ')
 

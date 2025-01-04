@@ -23,12 +23,8 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 	code = code.strip().replace(dot, '.').replace(dash, '-')
 	language = language.lower().strip()
 
-	# Initialize variables
-	decodes: JSONDictionary = get_decodes()
-	string_io: StringIO = StringIO()
-
 	# Error handling
-	if language not in decodes:
+	if language not in get_decodes():
 		logging.error(ERROR_MESSAGE6)
 		return
 
@@ -36,9 +32,13 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 		logging.error(ERROR_MESSAGE1)
 		return
 
-	if any(character not in {dot, dash, separator, ' ', '\n'} for character in code):
+	if any(character not in {'.', '-', separator, ' ', '\n'} for character in code):
 		logging.error(ERROR_MESSAGE2)
 		return
+
+	# Initialize variables
+	decodes: JSONDictionary = get_decodes()
+	string_io: StringIO = StringIO()
 
 	# Write
 	letters: List[str] = separate_words(code, dot, dash, separator)

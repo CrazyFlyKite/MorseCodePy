@@ -2,11 +2,11 @@
 __pycache__/
 *.pyc
 
+# Legacy functionality
+Legacy/
+
 # PyPI login and password
 .pypirc
-
-# Virtual environment
-venv/
 
 # Generated files or directories
 dist/

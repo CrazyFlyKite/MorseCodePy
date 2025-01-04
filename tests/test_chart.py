@@ -8,6 +8,7 @@ from MorseCodePy.chart import chart
 class TestChart(unittest.TestCase):
 	@patch('sys.stdout', new_callable=StringIO)
 	def test_chart(self, mock_stdout: Mock):
+		# Yes, that's a lot of text… But this is the only way I can test it
 		chart()
 
 		chart_output: str = mock_stdout.getvalue()
