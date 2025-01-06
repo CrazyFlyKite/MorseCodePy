@@ -93,13 +93,53 @@ from MorseCodePy import chart
 chart(dot='·')  # Try it yourself :)
 ```
 
+## Command Lines
+
+MorseCodePy also offers **terminal commands**! You can perform encoding, decoding, view a Morse code chart,
+list supported languages, and more directly from the terminal. All the commands are very similar to the original
+Python function, so I recommend to read the documentation for them first.
+
+### `encode`
+
+Encode text into Morse code
+
+Command: `morsecodepy encode <text> <language> [--dot DOT] [--dash DASH] [--separator SEPARATOR] [--error ERROR]`
+
+```bash
+morsecodepy encode "Python is fun!" english
+```
+
 ___
 
-## Note
+### `decode`
 
-When selecting a spoken language in the `encode()` or `decode()` functions, the output will automatically include
-`numbers` and `special`. However, if you choose only `numbers` or `special`, the output will contain exclusively
-their respective codes.
+Decode Morse code into text
+
+Command: `morsecodepy decode <code> <language> [--dot DOT] [--dash DASH] [--separator SEPARATOR] [--error ERROR]`
+
+```bash
+morsecodepy decode "-- --- .-. ... . / -.-. --- -.. ." spanish
+```
+
+___
+
+### `chart`
+
+Print out the code chart
+
+Command: `morsecodepy chart [--dot DOT] [--dash DASH]`
+
+```bash
+morsecodepy chart --dot '*' --dash '='
+```
+
+___
+
+### `languages`
+
+Print out the list of supported languages
+
+Command: `morsecodepy languages`
 
 ___
 

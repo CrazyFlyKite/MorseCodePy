@@ -25,7 +25,7 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 
 	# Error handling
 	if language not in get_decodes():
-		logging.error(ERROR_MESSAGE6)
+		logging.error(ERROR_MESSAGE3)
 		return
 
 	if any(len(symbol) != 1 for symbol in {dot, dash, separator}):

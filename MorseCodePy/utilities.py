@@ -5,17 +5,15 @@ from typing import TypeAlias, List, Dict, Optional, Final, Literal, TypeVar
 # Error and warning messages
 ERROR_MESSAGE1: Final[str] = 'Invalid Symbols - Dots, dashes, and separators must be single characters!'
 ERROR_MESSAGE2: Final[str] = 'Invalid Characters - Use only specified dots, dashes, spaces, and separators!'
-ERROR_MESSAGE3: Final[str] = 'Invalid Volume - Volume should be between 0.0 and 1.0!'
-ERROR_MESSAGE4: Final[str] = 'Invalid Volume - Volume should be between 0.0 and 3.0!'
-ERROR_MESSAGE5: Final[str] = 'Invalid Delay - The specified delay should be more than 0.3!'
-ERROR_MESSAGE6: Final[str] = 'Invalid Language - The specified language is not recognized or supported! Read the documentation for more details.'
-WARNING_MESSAGE1: Final[str] = 'Long Delay - The specified delay is longer than recommended (1 second). Playback may be slower than expected.'
-WARNING_MESSAGE2: Final[str] = 'Keyboard Interrupt - Morse code playback interrupted by user.'
+ERROR_MESSAGE3: Final[str] = 'Invalid Language - The specified language is not recognized or supported'
 
 # Custom types
 Language: TypeAlias = Literal['english', 'spanish', 'french', 'russian', 'ukrainian', 'numbers', 'special']
 JSONDictionary: TypeAlias = Dict[str, Dict[str, str]]
 PathLikeString: TypeAlias = str | PathLike
+
+# Other
+SUPPORTED_LANGUAGES: List[str] = ['english', 'spanish', 'french', 'russian', 'ukrainian']
 
 # Generic types
 KT = TypeVar('KT')

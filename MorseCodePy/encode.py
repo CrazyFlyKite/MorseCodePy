@@ -29,7 +29,7 @@ def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash
 
 	# Error handling: Ensure that language is a valid string
 	if not isinstance(language, str) or language not in encodes:
-		logging.error(ERROR_MESSAGE6)
+		logging.error(ERROR_MESSAGE3)
 		return
 
 	# Error handling: Ensure that dot, dash, and separator have only one symbol
