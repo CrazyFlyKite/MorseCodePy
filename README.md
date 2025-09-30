@@ -5,7 +5,6 @@
 ### Requirements
 
 ![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue)
-![pygame Version](https://img.shields.io/badge/pygame-2.5.2%2B-red)
 
 ## Introduction
 
@@ -16,7 +15,7 @@ ___
 
 ## Usage
 
-### `encode(string, /, language, *, dot, dash, error)`
+### `encode(string, /, language, *, dot, dash, error, markup)`
 
 Encodes the string into Morse code
 
@@ -25,7 +24,8 @@ Encodes the string into Morse code
 - `dot`: *(optional)* Symbol representing dots (default is `.`)
 - `dash`: *(optional)* Symbol representing dashes (default is `-`)
 - `separator`: *(optional)* Symbol separating words (default is `/`)
-- `error`: *(optional)* Symbol representing errors when the index is not found in the dictionary (default is `*`).
+- `error`: *(optional)* Symbol representing errors when the index is not found in the dictionary (default is `*`)
+- `markup`: *(optional)* If True, shows the original character in brackets before its Morse code (default is `False`)
 
 ```python
 from MorseCodePy import encode
@@ -46,19 +46,29 @@ print(encoded_string)
 # Output: *==* *=* =*== *== ** = ==**== / *** *== ** = =*=*== / #
 ```
 
+```python
+from MorseCodePy import encode
+
+# Encoding a Russian sentence with markup
+encoded_string: str = encode('До встречи!', language='russian', markup=True)
+print(encoded_string)
+
+# Output: [Д] -.. [О] --- / [В] .-- [С] ... [Т] - [Р] .-. [Е] . [Ч] ---. [И] .. [!] -.-.--
+```
+
 ___
 
-### `decode(code, /, language, *, dot, dash, error)`
+### `decode(code, /, language, *, dot, dash, error, markup)`
 
 Decode the Morse code into a string
 
 - `code`: Input Morse code string
-- `language`: Language for decoding (
-  e.g., `english`, `french`, `spanish`, `russian`, `ukrainian`, `numbers`, `special`)
+- `language`: Language for decoding (e.g., `english`, `french`, `spanish`, `russian`, `ukrainian`, `numbers`, `special`)
 - `dot`: *(optional)* Symbol representing dots (default is `.`)
 - `dash`: *(optional)* Symbol representing dashes (default is `-`)
 - `separator` *(optional)* Symbol separating words (default is `/`)
 - `error`: *(optional)* Symbol representing errors when the index is not found in the dictionary (default is `*`)
+- `markup`: *(optional)* If True, shows the original Morse code sequence in brackets before the decoded character (default is `False`)
 
 ```python
 from MorseCodePy import decode
@@ -103,7 +113,7 @@ reading the documentation for them first.
 
 Encode text into Morse code
 
-Command: `morsecodepy encode <text> <language> [--dot DOT] [--dash DASH] [--separator SEPARATOR] [--error ERROR]`
+Command: `morsecodepy encode <text> <language> [--dot DOT] [--dash DASH] [--separator SEPARATOR] [--error ERROR] [--markup]`
 
 ```bash
 morsecodepy encode "Python is fun!" english
@@ -115,7 +125,7 @@ ___
 
 Decode Morse code into text
 
-Command: `morsecodepy decode <code> <language> [--dot DOT] [--dash DASH] [--separator SEPARATOR] [--error ERROR]`
+Command: `morsecodepy decode <code> <language> [--dot DOT] [--dash DASH] [--separator SEPARATOR] [--error ERROR] [--markup]`
 
 ```bash
 morsecodepy decode "-- --- .-. ... . / -.-. --- -.. ." spanish

@@ -18,6 +18,7 @@ def main() -> None:
 	encode_parser.add_argument('--dash', type=str, default='-', help='Symbol for dashes')
 	encode_parser.add_argument('--separator', type=str, default='/', help='Symbol for separator between words')
 	encode_parser.add_argument('--error', type=str, default='*', help='Symbol for error if the symbol is not supported')
+	encode_parser.add_argument('--markup', type=bool, default=False, help='If True, shows the original character in brackets before its Morse code')
 
 	decode_parser: ArgumentParser = subparsers.add_parser('decode', help='Decode Morse code into text')
 	decode_parser.add_argument('code', type=str, help='Morse code to decode')
@@ -26,6 +27,7 @@ def main() -> None:
 	decode_parser.add_argument('--dash', type=str, default='-', help='Symbol for dashes')
 	decode_parser.add_argument('--separator', type=str, default='/', help='Symbol for separator between words')
 	decode_parser.add_argument('--error', type=str, default='*', help='Symbol for error if the symbol is not supported')
+	decode_parser.add_argument('--markup', type=bool, default=False, help='If True, shows the original Morse code sequence in brackets before the decoded character')
 
 	chart_parser: ArgumentParser = subparsers.add_parser('chart', help='Print out the code chart')
 	chart_parser.add_argument('--dot', type=str, default='.', help='Symbol for dots')
@@ -36,12 +38,12 @@ def main() -> None:
 	args: Namespace = parser.parse_args()
 	if args.command == 'encode':
 		text: str = encode(args.text, language=args.language, dot=args.dot, dash=args.dash, separator=args.separator,
-		                   error=args.error)
+		                   error=args.error, markup=args.markup)
 		if text is not None:
 			print(text)
 	elif args.command == 'decode':
 		text: str = decode(args.code, language=args.language, dot=args.dot, dash=args.dash, separator=args.separator,
-		                   error=args.error)
+		                   error=args.error, markup=args.markup)
 		if text is not None:
 			print(text)
 	elif args.command == 'chart':

@@ -15,7 +15,7 @@ def encode(string: str, /, language: Language, *, dot: Optional[str] = '.', dash
 	:parameter dash: Symbol representing dashes (default is `-`)
 	:parameter separator: Symbol separating words (default is `/`)
 	:parameter error: Symbol representing errors when the index is not found in the dictionary (default is `*`)
-	:parameter markup: If True, shows the original character in brackets before its Morse code
+	:parameter markup: If True, shows the original character in brackets before its Morse code (default is `False`)
 
 	:returns: Encoded string
 	"""

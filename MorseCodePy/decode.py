@@ -1,7 +1,7 @@
 import logging
 from io import StringIO
 
-from .utilities import *
+from utilities import *
 
 
 def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: Optional[str] = '-',
@@ -15,7 +15,7 @@ def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: 
 	:parameter dash: Symbol representing dashes (default is `-`)
 	:parameter separator: Symbol separating words (default is `/`)
 	:parameter error: Symbol representing errors when the index is not found in the dictionary (default is `*`)
-	:parameter markup: If True, shows the original Morse code sequence in brackets before the decoded character
+	:parameter markup: If True, shows the original Morse code sequence in brackets before the decoded character (default is `False`)
 
 	:returns: Decoded string
 	"""
