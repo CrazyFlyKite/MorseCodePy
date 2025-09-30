@@ -9,24 +9,23 @@
 
 ## Introduction
 
-**MorseCodePy** is a versatile Python library that streamlines the **encoding** and **decoding**
-of text into Morse code and back. With support for multiple languages, including
-**English**, **Russian**, **Ukrainian**,**Spanish**, **French**, as well as provisions for handling
-**numbers** and other **special characters**. This library offers a powerful and **user-friendly** Morse code tool.
+**MorseCodePy** helps with **encoding** text into Morse code and **decoding** it back. It supports multiple languages,
+including **English**, **Russian**, **Ukrainian**, **Spanish**, **French**. It also has support for **numbers** and
+other **special characters**.
 ___
 
 ## Usage
 
 ### `encode(string, /, language, *, dot, dash, error)`
 
-Encode a text string into Morse code.
+Encodes the string into Morse code
 
-- `string`: The text string you want to encode.
-- `language`: The target language for encoding (
-  e.g., `english`, `french`, `spanish`, `russian`, `ukrainian`, `numbers`, `special`).
-- `dot`: *(optional)* Symbol to represent dots (default is `.`).
-- `dash`: *(optional)* Symbol to represent dashes (default is `-`).
-- `error`: *(optional)* Symbol to represent errors when an unknown character is encountered (default is `*`).
+- `string`: Input string
+- `language`: Language for encoding (e.g., `english`, `french`, `spanish`, `russian`, `ukrainian`, `numbers`, `special`)
+- `dot`: *(optional)* Symbol representing dots (default is `.`)
+- `dash`: *(optional)* Symbol representing dashes (default is `-`)
+- `separator`: *(optional)* Symbol separating words (default is `/`)
+- `error`: *(optional)* Symbol representing errors when the index is not found in the dictionary (default is `*`).
 
 ```python
 from MorseCodePy import encode
@@ -42,7 +41,7 @@ print(encoded_string)
 from MorseCodePy import encode
 
 # Encoding a Ukrainian sentence with custom dot and dash symbols and unsupported characters
-encoded_string: str = encode('Привіт, світ! Ø', language='ukrainian', dot='*', dash='=', error='#')
+encoded_string: str = encode('Привіт, світ! Ü', language='ukrainian', dot='*', dash='=', error='#')
 print(encoded_string)
 # Output: *==* *=* =*== *== ** = ==**== / *** *== ** = =*=*== / #
 ```
@@ -51,14 +50,15 @@ ___
 
 ### `decode(code, /, language, *, dot, dash, error)`
 
-Decode Morse code into a text string.
+Decode the Morse code into a string
 
-- `code`: The Morse code string you want to decode.
-- `language`: The target language for decoding (
-  e.g., `english`, `french`, `spanish`, `russian`, `ukrainian`, `numbers`, `special`).
-- `dot`: *(optional)* Symbol to represent dots (default is `.`).
-- `dash`: *(optional)* Symbol to represent dashes (default is `-`).
-- `error`: *(optional)* Symbol to represent errors when an unknown Morse code sequence is encountered (default is `*`).
+- `code`: Input Morse code string
+- `language`: Language for decoding (
+  e.g., `english`, `french`, `spanish`, `russian`, `ukrainian`, `numbers`, `special`)
+- `dot`: *(optional)* Symbol representing dots (default is `.`)
+- `dash`: *(optional)* Symbol representing dashes (default is `-`)
+- `separator` *(optional)* Symbol separating words (default is `/`)
+- `error`: *(optional)* Symbol representing errors when the index is not found in the dictionary (default is `*`)
 
 ```python
 from MorseCodePy import decode
@@ -82,22 +82,22 @@ ___
 
 ### `chart(*, dot, dash)`
 
-Print a Morse code chart in the console.
+Print Morse code chart in the console
 
-- `dot`: *(optional)* Symbol to represent dots (default is `·`).
-- `dash`: *(optional)* Symbol to represent dashes (default is `-`).
+- `dot`: *(optional)* Symbol representing dots (default is `·`)
+- `dash`: *(optional)* Symbol representing dashes (default is `-`)
 
 ```python
 from MorseCodePy import chart
 
-chart(dot='·')  # Try it yourself :)
+chart(dot='.', dash='_')
 ```
 
 ## Command Lines
 
-MorseCodePy also offers **terminal commands**! You can perform encoding, decoding, view a Morse code chart,
-list supported languages, and more directly from the terminal. All the commands are very similar to the original
-Python function, so I recommend to read the documentation for them first.
+MorseCodePy also has **terminal commands**! You can encode, decode, view a Morse code chart, list supported languages,
+and more directly from the terminal. All the commands are very similar to the original Python function, so I recommend
+reading the documentation for them first.
 
 ### `encode`
 

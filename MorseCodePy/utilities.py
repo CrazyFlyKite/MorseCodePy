@@ -23,11 +23,11 @@ VT = TypeVar('VT')
 # Useful functions
 def reverse_dictionary(dictionary: Dict[KT, VT], /) -> Dict[VT, KT]:
 	"""
-	Reverse a dictionary.
+	Reverse a dictionary
 
-	:parameter dictionary: The input dictionary to be processed.
+	:parameter dictionary: Input dictionary
 
-	:returns: A list of individual Morse code characters.
+	:returns: List of individual Morse code characters
 	"""
 
 	return {value: key for key, value in dictionary.items()}
@@ -35,9 +35,9 @@ def reverse_dictionary(dictionary: Dict[KT, VT], /) -> Dict[VT, KT]:
 
 def get_encodes() -> JSONDictionary:
 	"""
-	Load the Morse code encodings from the "encodes.json".
+	Load the Morse code encodings from the "encodes.json"
 
-	:returns: A dictionary containing Morse code encodings.
+	:returns: Dictionary containing Morse code encodings
 	"""
 
 	file_path: str = path.join(path.dirname(path.abspath(__file__)), 'codes', 'encodes.json')
@@ -48,9 +48,9 @@ def get_encodes() -> JSONDictionary:
 
 def get_decodes() -> JSONDictionary:
 	"""
-	Load the Morse code decodings from the "decodes.json".
+	Load the Morse code decodings from the "decodes.json"
 
-	:returns: A dictionary containing Morse code decodings.
+	:returns: Dictionary containing Morse code decodings
 	"""
 
 	file_path: str = path.join(path.dirname(path.abspath(__file__)), 'codes', 'decodes.json')
@@ -59,18 +59,16 @@ def get_decodes() -> JSONDictionary:
 		return {key: reverse_dictionary(value) for key, value in json.load(file).items()}
 
 
-def separate_words(words: str, /, dot: str, dash: str, separator: str, *,
-                   sound_mode: Optional[bool] = False) -> List[str]:
+def separate_words(words: str, /, dot: str, dash: str, separator: str) -> List[str]:
 	"""
-	Separate a string into Morse code letters.
+	Separate a string into Morse code letters
 
-	:parameter words: The input string to be processed.
-	:parameter dot: The symbol to represent dots.
-	:parameter dash: The symbol to represent dashes.
-	:parameter separator: The symbol used to separate words.
-	:parameter sound_mode: A flag to include space characters when sound mode is enabled (default is False).
+	:parameter words: Input string
+	:parameter dot: Symbol representing dots
+	:parameter dash: Symbol representing dashes
+	:parameter separator: Symbol separating words
 
-	:returns: A list of Morse code letters.
+	:returns: List of Morse code letters
 	"""
 
 	letters: List[str] = []
@@ -88,8 +86,6 @@ def separate_words(words: str, /, dot: str, dash: str, separator: str, *,
 			if current:
 				letters.append(current)
 				current = ''
-			if sound_mode:
-				letters.append(' ')
 		else:
 			current += character
 
@@ -101,11 +97,11 @@ def separate_words(words: str, /, dot: str, dash: str, separator: str, *,
 
 def separate_letters(letters: List[str], /) -> List[str]:
 	"""
-	Separate Morse code letters into individual characters.
+	Separate Morse code letters into individual characters
 
-	:parameter letters: The input list to be processed.
+	:parameter letters: Input list
 
-	:returns: A list of individual Morse code characters.
+	:returns: List of individual Morse code characters
 	"""
 
 	return [character for letter in letters for character in letter]

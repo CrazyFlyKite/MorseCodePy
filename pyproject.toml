@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "MorseCodePy"
-version = "4.1"
+version = "4.2"
 description = "Easily Encode & Decode Morse Code"
 dependencies = []
 requires-python = ">=3.11"
@@ -20,13 +20,13 @@ classifiers = [
 ]
 
 [project.urls]
-Repository = "https://github.com/CrazyFlyKite/MorseCodePy"
-Download = "https://pypi.org/project/MorseCodePy"
+GitHub = "https://github.com/CrazyFlyKite/MorseCodePy"
+PyPI = "https://pypi.org/project/MorseCodePy"
 
 [options]
 packages = ["MorseCodePy"]
 include_package_data = true
-package_data = { MorseCodePy = ["sounds/*.wav", "codes/*.json"] }
+package_data = { MorseCodePy = ["codes/*.json"] }
 
 [project.scripts]
 morsecodepy = "MorseCodePy.cli:main"

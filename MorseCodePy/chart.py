@@ -6,24 +6,21 @@ from .utilities import *
 
 def chart(*, dot: Optional[str] = '·', dash: Optional[str] = '-') -> None:
 	"""
-	Print Morse code chart in the console.
+	Print Morse code chart in the console
 
-	:parameter dot: The symbol to represent dots in the chart.
-	:parameter dash: The symbol to represent dashes in the chart.
+	:parameter dot: Symbol representing dots (default is `·`)
+	:parameter dash: Symbol representing dashes (default is `-`)
 
 	:returns: `None`
 	"""
 
-	# Error Handling
 	if any(len(symbol) != 1 for symbol in {dot, dash}):
 		logging.error(ERROR_MESSAGE1)
 		return
 
-	# Initialize variables
 	string_io: StringIO = StringIO()
 	encodes: JSONDictionary = get_encodes()
 
-	# Write
 	string_io.write('Morse Code Chart\n\n' + '-' * 15 + '\n')
 
 	for language, codes in encodes.items():
