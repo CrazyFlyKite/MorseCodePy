@@ -1,7 +1,8 @@
 import logging
 from io import StringIO
+from typing import Optional
 
-from utilities import *
+from .utilities import *
 
 
 def decode(code: str, /, language: Language, *, dot: Optional[str] = '.', dash: Optional[str] = '-',

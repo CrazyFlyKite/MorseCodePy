@@ -1,6 +1,6 @@
 import json
 from os import PathLike, path
-from typing import TypeAlias, List, Dict, Optional, Final, Literal, TypeVar
+from typing import TypeAlias, List, Dict, Final, Literal, TypeVar
 
 # Error and warning messages
 ERROR_MESSAGE1: Final[str] = 'Invalid Symbols - Dots, dashes, and separators must be single characters!'
